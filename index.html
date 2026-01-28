@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Red Angel | Private AI for Windows & iOS</title>
-    <meta name="description" content="Red Angel - Private offline AI apps. Command center with Devil's Senate on Windows. Personal AI companion on iOS. No cloud. No tracking. Your data stays yours.">
-    <meta name="keywords" content="Red Angel, AI, offline, private, local LLM, iOS app, Windows app, journal, GGUF, personal AI">
+    <meta name="description" content="Red Angel - Private offline AI apps. Command center with Devil's Senate on Windows. Personal AI companion on iOS. No cloud. No tracking.">
+    <meta name="keywords" content="Red Angel, AI, offline, private, local LLM, iOS app, Windows app">
     <meta name="author" content="Shayz Productions">
+    <meta name="theme-color" content="#0a0a0f">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Red Angel | Private AI for Windows & iOS">
@@ -17,500 +18,921 @@
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@shayzxbt">
     <meta name="twitter:title" content="Red Angel | Private AI for Windows & iOS">
-    <meta name="twitter:description" content="Two apps. Total privacy. AI that never phones home.">
     
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader">
-            <div class="loader-ring">
-                <div class="ring-outer"></div>
-                <div class="ring-inner"></div>
+    <!-- Loading Screen - Cinematic -->
+    <div class="loader" id="loader">
+        <div class="loader-bg"></div>
+        
+        <!-- Animated Lines -->
+        <div class="loader-lines">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+            <div class="line line-3"></div>
+            <div class="line line-4"></div>
+        </div>
+        
+        <!-- Center Content -->
+        <div class="loader-center">
+            <!-- Logo with Circle Progress -->
+            <div class="loader-logo-wrap">
+                <svg class="loader-circle" viewBox="0 0 100 100">
+                    <circle class="circle-bg" cx="50" cy="50" r="46"/>
+                    <circle class="circle-progress" cx="50" cy="50" r="46" id="circleProgress"/>
+                </svg>
+                <div class="loader-logo">
+                    <img src="assets/logo.png" alt="Red Angel">
+                </div>
             </div>
-            <div class="loader-icon">
-                <img src="assets/logo.png" alt="Red Angel" class="loader-logo">
-            </div>
+            
+            <!-- Brand -->
             <div class="loader-brand">
-                <span class="loader-title">RED ANGEL</span>
-                <span class="loader-subtitle">Private AI</span>
+                <h1 class="loader-title">
+                    <span class="title-red">RED</span>
+                    <span class="title-white">ANGEL</span>
+                </h1>
+                <div class="loader-tagline">PRIVATE AI</div>
             </div>
-            <div class="loader-bar">
-                <div class="loader-progress"></div>
-            </div>
+            
+            <!-- Status -->
             <div class="loader-status">
-                <span class="status-text" id="loadingStatus">INITIALIZING SYSTEMS</span>
-                <span class="status-dots">...</span>
+                <span class="status-text" id="loaderStatus">Initializing</span>
+                <span class="status-dots"><span>.</span><span>.</span><span>.</span></span>
             </div>
         </div>
-        <div class="loader-footer">
-            <span>SHAYZ PRODUCTIONS</span>
+        
+        <!-- Bottom -->
+        <div class="loader-bottom">
+            <div class="loader-bar">
+                <div class="loader-bar-fill" id="loaderBar"></div>
+            </div>
         </div>
     </div>
 
-    <!-- Scanlines Overlay -->
-    <div class="scanlines"></div>
+    <!-- Global Overlays -->
+    <div class="noise-overlay"></div>
+    <div class="scanlines-overlay"></div>
     
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
-    
-    <!-- Ambient Glow -->
-    <div class="ambient-glow"></div>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Cursor Glow (Desktop) -->
+    <div class="cursor-glow" id="cursorGlow"></div>
 
     <!-- Navigation -->
     <nav class="nav" id="nav">
-        <div class="nav-logo">
-            <img src="assets/logo.png" alt="Red Angel" class="logo-img">
-            <span class="logo-text">RED ANGEL</span>
-        </div>
-        <div class="nav-links" id="navLinks">
-            <a href="#apps">Apps</a>
-            <a href="#windows">Windows</a>
-            <a href="#ios">iOS</a>
-            <a href="#screenshots">Screenshots</a>
-            <a href="#community">Community</a>
-        </div>
-        <div class="nav-right">
-            <a href="https://x.com/i/communities/1983507349546357091" target="_blank" class="nav-community">
-                <span>𝕏</span> Community
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <img src="assets/logo.png" alt="Red Angel" class="nav-logo">
+                <span class="nav-title">RED ANGEL</span>
             </a>
-            <button class="nav-mobile-btn" id="mobileMenuBtn">☰</button>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="#apps" class="nav-link">Apps</a>
+                <a href="#windows" class="nav-link">Windows</a>
+                <a href="#ios" class="nav-link">iOS</a>
+                <a href="#why" class="nav-link">Why Offline</a>
+                <a href="#screenshots" class="nav-link">Screenshots</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="#apps" class="nav-cta magnetic">
+                    <span>Download</span>
+                    <div class="btn-glow"></div>
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-bg"></div>
+        <div class="mobile-menu-inner">
+            <a href="#apps" class="mobile-link">Apps</a>
+            <a href="#windows" class="mobile-link">Windows</a>
+            <a href="#ios" class="mobile-link">iOS</a>
+            <a href="#why" class="mobile-link">Why Offline</a>
+            <a href="#screenshots" class="mobile-link">Screenshots</a>
+            <a href="#faq" class="mobile-link">FAQ</a>
+            <a href="#apps" class="mobile-cta">Download Now</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-bg">
+            <div class="hero-gradient"></div>
             <div class="hero-grid"></div>
+            <div class="hero-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <div class="orb orb-3"></div>
+            </div>
+            <div class="hero-particles" id="heroParticles"></div>
         </div>
         
         <div class="hero-content">
             <div class="hero-badge animate-in">
-                <span class="badge-icon">🔒</span>
-                <span>100% OFFLINE</span>
-                <span class="badge-separator">•</span>
-                <span>ZERO TRACKING</span>
-                <span class="badge-separator">•</span>
-                <span>YOUR DATA</span>
+                <span class="badge-dot"></span>
+                <span>100% Offline</span>
+                <span class="badge-sep">•</span>
+                <span>Zero Tracking</span>
             </div>
             
             <h1 class="hero-title animate-in delay-1">
                 <span class="title-line">
-                    <span class="title-red glitch" data-text="RED">RED</span>
-                    <span class="title-white">ANGEL</span>
+                    <span class="word word-red" data-text="RED">
+                        <span class="letter">R</span>
+                        <span class="letter">E</span>
+                        <span class="letter">D</span>
+                    </span>
+                    <span class="word word-white">
+                        <span class="letter">A</span>
+                        <span class="letter">N</span>
+                        <span class="letter">G</span>
+                        <span class="letter">E</span>
+                        <span class="letter">L</span>
+                    </span>
                 </span>
             </h1>
             
-            <p class="hero-tagline animate-in delay-2">Private AI That Never Phones Home</p>
-            
-            <p class="hero-subtitle animate-in delay-3">
-                <span class="subtitle-highlight">Two Apps.</span>
-                <span class="subtitle-highlight">Total Privacy.</span>
-                <span class="subtitle-highlight">No Limits.</span>
+            <p class="hero-subtitle animate-in delay-2">
+                <span id="heroSubtitle"></span>
+                <span class="cursor">|</span>
             </p>
             
-            <div class="hero-cta animate-in delay-4">
-                <a href="#windows" class="btn btn-primary btn-glow">
-                    <span class="btn-icon">🖥️</span>
-                    <span class="btn-text">WINDOWS APP</span>
+            <p class="hero-desc animate-in delay-3">Two private AI apps. One for power users. One for your wellbeing. Both keep your data yours.</p>
+            
+            <div class="hero-buttons animate-in delay-4">
+                <a href="#windows" class="btn btn-primary magnetic">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                    <span>Windows App</span>
+                    <div class="btn-shine"></div>
                 </a>
-                <a href="#ios" class="btn btn-secondary btn-ios">
-                    <span class="btn-icon">📱</span>
-                    <span class="btn-text">iOS APP</span>
+                <a href="#ios" class="btn btn-secondary magnetic">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <span>iOS App</span>
                 </a>
+            </div>
+            
+            <div class="hero-stats animate-in delay-5">
+                <div class="stat">
+                    <span class="stat-value" data-count="2">0</span>
+                    <span class="stat-label">Apps</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value" data-count="6">0</span>
+                    <span class="stat-label">AI Seats</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value" data-count="40">0</span>
+                    <span class="stat-label">Personas</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value special" data-count="0">0</span>
+                    <span class="stat-label">Data Sent</span>
+                </div>
             </div>
         </div>
         
-        <div class="scroll-indicator">
-            <span class="scroll-text">EXPLORE</span>
-            <span class="scroll-arrow">▼</span>
-        </div>
+        <a href="#apps" class="scroll-hint">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Scroll to explore</span>
+        </a>
     </section>
 
-    <!-- Apps Overview Section -->
-    <section class="apps-overview" id="apps">
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,0 C480,100 960,100 1440,0 L1440,100 L0,100 Z" fill="currentColor"/>
+        </svg>
+    </div>
+
+    <!-- Apps Overview -->
+    <section class="section apps" id="apps">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">CHOOSE YOUR PLATFORM</span>
-                <h2 class="section-title">Two Apps. One Mission.</h2>
-                <p class="section-subtitle">Both run 100% offline. Both keep your data private. Different superpowers.</p>
+                <span class="section-label reveal-text">Choose Your Platform</span>
+                <h2 class="section-title reveal-text">Two Apps. One Mission.</h2>
+                <p class="section-desc reveal-text">Different superpowers. Same commitment to your privacy.</p>
             </div>
             
             <div class="apps-grid">
-                <!-- Windows Card -->
-                <a href="#windows" class="app-overview-card windows">
-                    <div class="aoc-glow"></div>
-                    <div class="aoc-header">
-                        <div class="aoc-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                <a href="#windows" class="app-card windows tilt-card">
+                    <div class="card-bg"></div>
+                    <div class="card-border"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <div class="app-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                            </div>
+                            <span class="app-badge">Desktop</span>
                         </div>
-                        <span class="aoc-badge">DESKTOP</span>
+                        <h3 class="card-title">Red Angel for Windows</h3>
+                        <p class="card-subtitle">AI Command Center</p>
+                        <p class="card-desc">Run local AI models with the Devil's Senate — 6 AI minds that debate your questions from different perspectives.</p>
+                        <div class="card-features">
+                            <span>⛧ Devil's Senate</span>
+                            <span>🎭 40+ Personas</span>
+                            <span>📚 RAG System</span>
+                            <span>💻 Code Sandbox</span>
+                        </div>
+                        <div class="card-cta">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
                     </div>
-                    <h3 class="aoc-title">Windows</h3>
-                    <p class="aoc-tagline">AI Command Center</p>
-                    <p class="aoc-desc">Devil's Senate multi-agent council. 6 AI minds debate your questions. Built for power users.</p>
-                    <div class="aoc-features">
-                        <span>⛧ Devil's Senate</span>
-                        <span>🎭 40+ Personas</span>
-                        <span>📚 RAG System</span>
-                    </div>
-                    <div class="aoc-cta">
-                        <span>Learn More</span>
-                        <span class="arrow">→</span>
-                    </div>
+                    <div class="card-shine"></div>
                 </a>
                 
-                <!-- iOS Card -->
-                <a href="#ios" class="app-overview-card ios">
-                    <div class="aoc-glow"></div>
-                    <div class="aoc-header">
-                        <div class="aoc-icon apple">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <a href="#ios" class="app-card ios tilt-card">
+                    <div class="card-bg"></div>
+                    <div class="card-border"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <div class="app-icon ios-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            </div>
+                            <span class="app-badge ios-badge">iOS</span>
                         </div>
-                        <span class="aoc-badge ios">iOS</span>
+                        <h3 class="card-title">Red Angel for iOS</h3>
+                        <p class="card-subtitle">Personal AI Companion</p>
+                        <p class="card-desc">Your private AI journal, mood tracker, oracle, and daily companion. Built for your mental wellbeing.</p>
+                        <div class="card-features">
+                            <span>📔 AI Journal</span>
+                            <span>🔮 Oracle</span>
+                            <span>💭 Dreams</span>
+                            <span>⏰ Time Capsules</span>
+                        </div>
+                        <div class="card-cta">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
                     </div>
-                    <h3 class="aoc-title">iPhone & iPad</h3>
-                    <p class="aoc-tagline">Personal AI Companion</p>
-                    <p class="aoc-desc">Your private AI journal, mood tracker, and daily companion. Built for your wellbeing.</p>
-                    <div class="aoc-features">
-                        <span>📔 AI Journal</span>
-                        <span>🔮 Oracle</span>
-                        <span>☀️ Daily Briefings</span>
-                    </div>
-                    <div class="aoc-cta">
-                        <span>Learn More</span>
-                        <span class="arrow">→</span>
-                    </div>
+                    <div class="card-shine"></div>
                 </a>
             </div>
             
-            <div class="privacy-banner">
-                <div class="privacy-icon">🔐</div>
-                <div class="privacy-text">
-                    <strong>Your Privacy Is Sacred</strong>
-                    <span>Both apps run entirely on your device. No cloud servers. No data collection. No tracking. Ever.</span>
+            <div class="privacy-notice floating">
+                <div class="privacy-icon-wrap">
+                    <div class="privacy-icon">🔒</div>
+                    <div class="privacy-pulse"></div>
+                </div>
+                <div class="privacy-content">
+                    <strong>Your Privacy is Sacred</strong>
+                    <p>Both apps run 100% on your device. No cloud. No tracking. No data collection. Ever.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Windows App Section -->
-    <section class="platform-section windows-section" id="windows">
-        <div class="platform-bg"></div>
+    <!-- Windows Section -->
+    <section class="section platform-section" id="windows">
+        <div class="platform-bg">
+            <div class="platform-gradient windows-gradient"></div>
+            <div class="platform-grid"></div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
         <div class="container">
             <div class="platform-header">
                 <div class="platform-icon">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                    <div class="icon-glow"></div>
                 </div>
-                <span class="section-tag">WINDOWS APP</span>
+                <span class="section-label">Windows App</span>
                 <h2 class="section-title">The AI Command Center</h2>
-                <p class="section-subtitle">Run local LLMs with the Devil's Senate — a council of 6 AI minds that debate, argue, and deliver verdicts on your questions.</p>
+                <p class="section-desc">Run powerful local LLMs with the Devil's Senate — a council of 6 AI minds that debate, argue, and deliver verdicts.</p>
             </div>
             
             <!-- Devil's Senate Feature -->
-            <div class="feature-highlight">
-                <div class="fh-visual">
-                    <div class="senate-ring-mini">
-                        <div class="mini-seat">😈</div>
-                        <div class="mini-seat">🏗️</div>
-                        <div class="mini-seat">🃏</div>
-                        <div class="mini-seat">📚</div>
-                        <div class="mini-seat">💖</div>
-                        <div class="mini-seat">⚔️</div>
-                        <div class="mini-center">⛧</div>
+            <div class="feature-spotlight glass-card">
+                <div class="spotlight-visual">
+                    <div class="senate-visual">
+                        <div class="senate-ring"></div>
+                        <div class="senate-seat" data-seat="1" style="--angle: 0deg; --delay: 0s">
+                            <span class="seat-emoji">😈</span>
+                            <span class="seat-name">Devil's Advocate</span>
+                            <div class="seat-glow"></div>
+                        </div>
+                        <div class="senate-seat" data-seat="2" style="--angle: 60deg; --delay: 0.1s">
+                            <span class="seat-emoji">🏗️</span>
+                            <span class="seat-name">The Architect</span>
+                            <div class="seat-glow"></div>
+                        </div>
+                        <div class="senate-seat" data-seat="3" style="--angle: 120deg; --delay: 0.2s">
+                            <span class="seat-emoji">🃏</span>
+                            <span class="seat-name">The Wildcard</span>
+                            <div class="seat-glow"></div>
+                        </div>
+                        <div class="senate-seat" data-seat="4" style="--angle: 180deg; --delay: 0.3s">
+                            <span class="seat-emoji">📚</span>
+                            <span class="seat-name">The Scholar</span>
+                            <div class="seat-glow"></div>
+                        </div>
+                        <div class="senate-seat" data-seat="5" style="--angle: 240deg; --delay: 0.4s">
+                            <span class="seat-emoji">💖</span>
+                            <span class="seat-name">The Empath</span>
+                            <div class="seat-glow"></div>
+                        </div>
+                        <div class="senate-seat" data-seat="6" style="--angle: 300deg; --delay: 0.5s">
+                            <span class="seat-emoji">⚔️</span>
+                            <span class="seat-name">The Executioner</span>
+                            <div class="seat-glow"></div>
+                        </div>
+                        <div class="senate-center">
+                            <span>⛧</span>
+                            <div class="center-pulse"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="fh-content">
-                    <span class="fh-tag">KILLER FEATURE</span>
-                    <h3>⛧ Devil's Senate</h3>
-                    <p>Load different AI models into 6 seats. Ask one question. Watch them debate from different perspectives — Devil's Advocate challenges, The Architect plans, The Wildcard surprises, The Scholar cites, The Empath feels, and The Executioner decides.</p>
-                    <div class="fh-modes">
-                        <span>12 Council Modes:</span>
-                        <div class="mode-pills">
-                            <span>Round Table</span>
-                            <span>Debate</span>
-                            <span>Consensus</span>
-                            <span>Interrogation</span>
-                            <span>Brainstorm</span>
-                            <span>+7 more</span>
+                <div class="spotlight-content">
+                    <span class="spotlight-label">
+                        <span class="label-icon">⭐</span>
+                        Killer Feature
+                    </span>
+                    <h3 class="spotlight-title">⛧ Devil's Senate</h3>
+                    <p class="spotlight-desc">Load different AI models into 6 seats. Ask one question. Watch them debate from different perspectives — the Devil's Advocate challenges everything, the Architect plans solutions, the Wildcard brings chaos, the Scholar cites facts, the Empath considers feelings, and the Executioner makes the final call.</p>
+                    <div class="spotlight-modes">
+                        <span class="mode-label">12 Council Modes:</span>
+                        <div class="modes-list">
+                            <span class="mode-tag">Round Table</span>
+                            <span class="mode-tag">Debate</span>
+                            <span class="mode-tag">Consensus</span>
+                            <span class="mode-tag">Interrogation</span>
+                            <span class="mode-tag">Brainstorm</span>
+                            <span class="mode-tag">+7 more</span>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Windows Features Grid -->
+            <!-- Windows Features -->
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon-wrap"><span class="feature-icon">🎭</span></div>
-                    <h3>40+ Personalities</h3>
-                    <p>Code Expert, Creative Writer, Villain, and more. Create your own custom characters.</p>
+                <div class="feature-card glass-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">🎭</span>
+                    </div>
+                    <h4>40+ Personalities</h4>
+                    <p>Code Expert, Creative Writer, Villain, Philosopher. Create custom personas.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrap"><span class="feature-icon">📚</span></div>
-                    <h3>Knowledge Base (RAG)</h3>
-                    <p>Chat with your documents. PDF, TXT, MD, DOCX — all indexed locally.</p>
+                <div class="feature-card glass-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">📚</span>
+                    </div>
+                    <h4>Knowledge Base</h4>
+                    <p>Chat with documents. PDF, TXT, MD, DOCX — all indexed locally with RAG.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrap"><span class="feature-icon">🧪</span></div>
-                    <h3>Prompt Lab</h3>
+                <div class="feature-card glass-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">🧪</span>
+                    </div>
+                    <h4>Prompt Lab</h4>
                     <p>Visual prompt builder with variables, templates, and A/B testing.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrap"><span class="feature-icon">🌳</span></div>
-                    <h3>Conversation Branching</h3>
+                <div class="feature-card glass-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">🌳</span>
+                    </div>
+                    <h4>Conversation Branching</h4>
                     <p>Fork conversations at any point. Explore alternatives. Merge the best.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrap"><span class="feature-icon">💻</span></div>
-                    <h3>Code Sandbox</h3>
+                <div class="feature-card glass-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">💻</span>
+                    </div>
+                    <h4>Code Sandbox</h4>
                     <p>Execute JavaScript, Python, and Shell scripts directly in the app.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrap"><span class="feature-icon">⚡</span></div>
-                    <h3>GPU Acceleration</h3>
-                    <p>CUDA support for NVIDIA GPUs. Automatic hardware optimization.</p>
+                <div class="feature-card glass-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">⚡</span>
+                    </div>
+                    <h4>GPU Acceleration</h4>
+                    <p>NVIDIA CUDA support. Automatic hardware detection and optimization.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrap"><span class="feature-icon">📦</span></div>
-                    <h3>Model Manager</h3>
-                    <p>Download and switch between GGUF models. Drag and drop support.</p>
+                <div class="feature-card glass-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">📦</span>
+                    </div>
+                    <h4>Model Manager</h4>
+                    <p>Download GGUF models from Hugging Face. Drag and drop support.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrap"><span class="feature-icon">🎨</span></div>
-                    <h3>11 Retro Themes</h3>
+                <div class="feature-card glass-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">🎨</span>
+                    </div>
+                    <h4>11 Retro Themes</h4>
                     <p>Blood Moon, Cyberpunk, Matrix, Game Boy, DOS Amber, and more.</p>
                 </div>
             </div>
             
             <!-- Windows Download -->
-            <div class="platform-download">
-                <div class="pd-info">
+            <div class="download-box glass-card">
+                <div class="download-info">
                     <h4>System Requirements</h4>
-                    <div class="pd-specs">
-                        <span>💾 8GB+ RAM (16GB recommended)</span>
-                        <span>💿 5GB storage + models</span>
-                        <span>🎮 GPU optional (NVIDIA CUDA)</span>
-                        <span>🖥️ Windows 10/11 64-bit</span>
+                    <div class="requirements">
+                        <div class="req"><span>💾</span> 8GB+ RAM</div>
+                        <div class="req"><span>💿</span> 5GB Storage</div>
+                        <div class="req"><span>🎮</span> GPU Optional</div>
+                        <div class="req"><span>🖥️</span> Windows 10/11</div>
                     </div>
                 </div>
-                <a href="#" class="download-btn-large">
-                    <div class="dbl-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                <a href="#" class="download-btn windows-btn magnetic">
+                    <div class="download-btn-bg"></div>
+                    <svg class="download-btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                    <div class="download-btn-text">
+                        <span class="download-btn-title">Download for Windows</span>
+                        <span class="download-btn-meta">64-bit • ~150 MB • Free</span>
                     </div>
-                    <div class="dbl-text">
-                        <span class="dbl-action">Download for Windows</span>
-                        <span class="dbl-detail">64-bit • ~150 MB • Free</span>
-                    </div>
-                    <span class="dbl-arrow">↓</span>
+                    <svg class="download-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- iOS App Section -->
-    <section class="platform-section ios-section" id="ios">
-        <div class="platform-bg ios-bg"></div>
+    <!-- iOS Section -->
+    <section class="section platform-section ios-platform" id="ios">
+        <div class="platform-bg">
+            <div class="platform-gradient ios-gradient"></div>
+            <div class="platform-grid"></div>
+            <div class="floating-shapes ios-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
         <div class="container">
             <div class="platform-header">
-                <div class="platform-icon apple">
+                <div class="platform-icon ios-platform-icon">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <div class="icon-glow ios-glow"></div>
                 </div>
-                <span class="section-tag ios-tag">iOS APP</span>
+                <span class="section-label ios-label">iOS App</span>
                 <h2 class="section-title">Your Personal AI Companion</h2>
-                <p class="section-subtitle">An AI-powered journal, mood tracker, and life companion that runs entirely on your iPhone or iPad. Your thoughts stay yours.</p>
+                <p class="section-desc">An AI-powered journal, mood tracker, and life companion. Your private thoughts stay on your device.</p>
             </div>
             
-            <!-- iOS Feature Highlight -->
-            <div class="feature-highlight ios-highlight">
-                <div class="fh-content">
-                    <span class="fh-tag ios-fh-tag">DAILY EXPERIENCE</span>
-                    <h3>☀️ Start Every Day Right</h3>
-                    <p>Wake up to personalized Daily Briefings that understand your mood patterns, remind you of your goals, and help you prepare for what's ahead. Your AI companion learns from your journal entries to provide genuine, thoughtful insights.</p>
-                    <div class="ios-highlights">
-                        <div class="ios-hl-item">
-                            <span class="ios-hl-icon">🧘</span>
-                            <span>Guided breathing exercises</span>
+            <!-- iOS Feature Spotlight -->
+            <div class="feature-spotlight ios-spotlight glass-card">
+                <div class="spotlight-content">
+                    <span class="spotlight-label ios-spotlight-label">
+                        <span class="label-icon">☀️</span>
+                        Daily Experience
+                    </span>
+                    <h3 class="spotlight-title">Start Every Day Right</h3>
+                    <p class="spotlight-desc">Wake up to personalized Daily Briefings that understand your mood patterns, remind you of your goals, and help you prepare for what's ahead. Your AI companion learns from your journal to provide genuine insights.</p>
+                    <div class="ios-features-mini">
+                        <div class="ios-mini-feature">
+                            <span>🧘</span>
+                            <span>Breathing Exercises</span>
                         </div>
-                        <div class="ios-hl-item">
-                            <span class="ios-hl-icon">📊</span>
-                            <span>Mood tracking & patterns</span>
+                        <div class="ios-mini-feature">
+                            <span>📊</span>
+                            <span>Mood Tracking</span>
                         </div>
-                        <div class="ios-hl-item">
-                            <span class="ios-hl-icon">🎯</span>
-                            <span>Focus modes for productivity</span>
+                        <div class="ios-mini-feature">
+                            <span>🎯</span>
+                            <span>Focus Modes</span>
                         </div>
                     </div>
                 </div>
-                <div class="fh-visual ios-visual">
-                    <div class="ios-mockup">
-                        <div class="ios-notch"></div>
-                        <div class="ios-screen">
-                            <div class="ios-demo-header">Good Morning ☀️</div>
-                            <div class="ios-demo-mood">How are you feeling?</div>
-                            <div class="ios-demo-moods">
-                                <span>😊</span><span>😌</span><span>😔</span><span>😤</span><span>🥰</span>
+                <div class="spotlight-visual">
+                    <div class="iphone-mockup">
+                        <div class="iphone-frame">
+                            <div class="iphone-notch"></div>
+                            <div class="iphone-screen">
+                                <div class="ios-demo">
+                                    <div class="ios-demo-time">9:41</div>
+                                    <div class="ios-demo-greeting">Good Morning ☀️</div>
+                                    <div class="ios-demo-question">How are you feeling?</div>
+                                    <div class="ios-demo-moods">
+                                        <span class="mood-btn">😊</span>
+                                        <span class="mood-btn">😌</span>
+                                        <span class="mood-btn active">😔</span>
+                                        <span class="mood-btn">😤</span>
+                                        <span class="mood-btn">🥰</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="iphone-reflection"></div>
                     </div>
                 </div>
             </div>
             
-            <!-- iOS Features Grid -->
+            <!-- iOS Features -->
             <div class="features-grid ios-features">
-                <div class="feature-card ios-card">
-                    <div class="feature-icon-wrap ios-icon-wrap"><span class="feature-icon">📔</span></div>
-                    <h3>AI Journal</h3>
-                    <p>Write freely. Get AI-powered insights, prompts, and reflections on your entries.</p>
+                <div class="feature-card ios-card glass-card" data-aos>
+                    <div class="feature-icon-wrap ios-icon-wrap">
+                        <span class="feature-icon">📔</span>
+                    </div>
+                    <h4>AI Journal</h4>
+                    <p>Write freely. Get AI-powered insights, prompts, and reflections.</p>
                 </div>
-                <div class="feature-card ios-card">
-                    <div class="feature-icon-wrap ios-icon-wrap"><span class="feature-icon">🔮</span></div>
-                    <h3>Oracle</h3>
-                    <p>Ask questions about life decisions. Get thoughtful, personalized guidance.</p>
+                <div class="feature-card ios-card glass-card" data-aos>
+                    <div class="feature-icon-wrap ios-icon-wrap">
+                        <span class="feature-icon">🔮</span>
+                    </div>
+                    <h4>Oracle</h4>
+                    <p>Ask questions about life decisions. Get thoughtful guidance.</p>
                 </div>
-                <div class="feature-card ios-card">
-                    <div class="feature-icon-wrap ios-icon-wrap"><span class="feature-icon">💭</span></div>
-                    <h3>Dream Journal</h3>
-                    <p>Record your dreams. AI helps interpret patterns and meanings.</p>
+                <div class="feature-card ios-card glass-card" data-aos>
+                    <div class="feature-icon-wrap ios-icon-wrap">
+                        <span class="feature-icon">💭</span>
+                    </div>
+                    <h4>Dream Journal</h4>
+                    <p>Record dreams. AI helps interpret patterns and meanings.</p>
                 </div>
-                <div class="feature-card ios-card">
-                    <div class="feature-icon-wrap ios-icon-wrap"><span class="feature-icon">⏰</span></div>
-                    <h3>Time Capsules</h3>
-                    <p>Write messages to your future self. They unlock when the time is right.</p>
+                <div class="feature-card ios-card glass-card" data-aos>
+                    <div class="feature-icon-wrap ios-icon-wrap">
+                        <span class="feature-icon">⏰</span>
+                    </div>
+                    <h4>Time Capsules</h4>
+                    <p>Write messages to your future self. They unlock when ready.</p>
                 </div>
-                <div class="feature-card ios-card">
-                    <div class="feature-icon-wrap ios-icon-wrap"><span class="feature-icon">⚖️</span></div>
-                    <h3>Decision Helper</h3>
-                    <p>Struggling with choices? AI helps you weigh pros, cons, and implications.</p>
+                <div class="feature-card ios-card glass-card" data-aos>
+                    <div class="feature-icon-wrap ios-icon-wrap">
+                        <span class="feature-icon">⚖️</span>
+                    </div>
+                    <h4>Decision Helper</h4>
+                    <p>Struggling with choices? AI weighs pros, cons, implications.</p>
                 </div>
-                <div class="feature-card ios-card">
-                    <div class="feature-icon-wrap ios-icon-wrap"><span class="feature-icon">👥</span></div>
-                    <h3>People Notes</h3>
-                    <p>Keep private notes about people in your life. Remember what matters.</p>
+                <div class="feature-card ios-card glass-card" data-aos>
+                    <div class="feature-icon-wrap ios-icon-wrap">
+                        <span class="feature-icon">👥</span>
+                    </div>
+                    <h4>People Notes</h4>
+                    <p>Keep private notes about people. Remember what matters.</p>
                 </div>
-                <div class="feature-card ios-card">
-                    <div class="feature-icon-wrap ios-icon-wrap"><span class="feature-icon">💬</span></div>
-                    <h3>Private Chat</h3>
-                    <p>Talk to AI about anything. Uncensored, unjudged, completely private.</p>
+                <div class="feature-card ios-card glass-card" data-aos>
+                    <div class="feature-icon-wrap ios-icon-wrap">
+                        <span class="feature-icon">💬</span>
+                    </div>
+                    <h4>Private Chat</h4>
+                    <p>Talk to AI about anything. Uncensored, unjudged, private.</p>
                 </div>
-                <div class="feature-card ios-card">
-                    <div class="feature-icon-wrap ios-icon-wrap"><span class="feature-icon">🔒</span></div>
-                    <h3>Face ID Lock</h3>
-                    <p>Your journal is protected. Only you can access your private thoughts.</p>
+                <div class="feature-card ios-card glass-card" data-aos>
+                    <div class="feature-icon-wrap ios-icon-wrap">
+                        <span class="feature-icon">🔒</span>
+                    </div>
+                    <h4>Face ID Lock</h4>
+                    <p>Your journal is protected. Only you can access it.</p>
                 </div>
             </div>
             
             <!-- iOS Download -->
-            <div class="platform-download ios-download">
-                <div class="pd-info">
+            <div class="download-box ios-download-box glass-card">
+                <div class="download-info">
                     <h4>Requirements</h4>
-                    <div class="pd-specs">
-                        <span>📱 iPhone or iPad</span>
-                        <span>🍎 iOS 17.0+</span>
-                        <span>🧠 On-device AI (MLX)</span>
-                        <span>🔒 Face ID / Touch ID</span>
+                    <div class="requirements">
+                        <div class="req"><span>📱</span> iPhone/iPad</div>
+                        <div class="req"><span>🍎</span> iOS 17.0+</div>
+                        <div class="req"><span>🧠</span> On-device AI</div>
+                        <div class="req"><span>🔒</span> Face ID</div>
                     </div>
                 </div>
-                <a href="#" class="download-btn-large ios-download-btn">
-                    <div class="dbl-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <a href="#" class="download-btn ios-btn magnetic">
+                    <div class="download-btn-bg"></div>
+                    <svg class="download-btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <div class="download-btn-text">
+                        <span class="download-btn-title">Download on App Store</span>
+                        <span class="download-btn-meta">Coming Soon • Free</span>
                     </div>
-                    <div class="dbl-text">
-                        <span class="dbl-action">Download on App Store</span>
-                        <span class="dbl-detail">Coming Soon • Free</span>
-                    </div>
-                    <span class="dbl-arrow">↓</span>
+                    <svg class="download-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Offline Section -->
+    <section class="section why-section" id="why">
+        <div class="why-bg">
+            <div class="why-gradient"></div>
+        </div>
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">The Philosophy</span>
+                <h2 class="section-title">Why Offline AI?</h2>
+                <p class="section-desc">In a world where every app wants your data, we chose a different path.</p>
+            </div>
+            
+            <div class="why-grid">
+                <div class="why-card glass-card" data-aos>
+                    <div class="why-icon-wrap">
+                        <span class="why-icon">🔐</span>
+                        <div class="why-icon-glow"></div>
+                    </div>
+                    <h4>Total Privacy</h4>
+                    <p>Your conversations never leave your device. No servers. No logs. No one listening.</p>
+                </div>
+                <div class="why-card glass-card" data-aos>
+                    <div class="why-icon-wrap">
+                        <span class="why-icon">🚫</span>
+                        <div class="why-icon-glow"></div>
+                    </div>
+                    <h4>No Censorship</h4>
+                    <p>Ask anything. Local models don't have corporate filters or content restrictions.</p>
+                </div>
+                <div class="why-card glass-card" data-aos>
+                    <div class="why-icon-wrap">
+                        <span class="why-icon">✈️</span>
+                        <div class="why-icon-glow"></div>
+                    </div>
+                    <h4>Works Anywhere</h4>
+                    <p>No internet? No problem. Full AI on a plane, mountains, or underground.</p>
+                </div>
+                <div class="why-card glass-card" data-aos>
+                    <div class="why-icon-wrap">
+                        <span class="why-icon">💰</span>
+                        <div class="why-icon-glow"></div>
+                    </div>
+                    <h4>No Subscriptions</h4>
+                    <p>Pay once, own forever. No monthly fees. No API costs. No limits.</p>
+                </div>
+                <div class="why-card glass-card" data-aos>
+                    <div class="why-icon-wrap">
+                        <span class="why-icon">⚡</span>
+                        <div class="why-icon-glow"></div>
+                    </div>
+                    <h4>Lightning Fast</h4>
+                    <p>No network latency. Responses start instantly. Your hardware, your speed.</p>
+                </div>
+                <div class="why-card glass-card" data-aos>
+                    <div class="why-icon-wrap">
+                        <span class="why-icon">🎛️</span>
+                        <div class="why-icon-glow"></div>
+                    </div>
+                    <h4>Full Control</h4>
+                    <p>Choose models. Tweak parameters. No black boxes. You own the experience.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Screenshots Section -->
-    <section class="screenshots" id="screenshots">
+    <section class="section screenshots-section" id="screenshots">
         <div class="container">
-            <div class="screenshots-header">
-                <span class="section-tag">SEE IT IN ACTION</span>
-                <h2 class="section-title">📸 Screenshots</h2>
+            <div class="section-header">
+                <span class="section-label">See It In Action</span>
+                <h2 class="section-title">Screenshots</h2>
             </div>
             
-            <div class="screenshot-tabs">
-                <button class="screenshot-tab active" data-tab="windows">Windows App</button>
-                <button class="screenshot-tab" data-tab="ios">iOS App</button>
+            <div class="screenshots-tabs">
+                <button class="screenshots-tab active" data-tab="windows">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                    <span>Windows</span>
+                </button>
+                <button class="screenshots-tab" data-tab="ios">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <span>iOS</span>
+                </button>
             </div>
             
-            <div class="screenshot-gallery" id="windowsScreenshots">
-                <div class="screenshot-item main-shot">
-                    <img src="assets/screenshots/main.png" alt="Main Interface" loading="lazy">
-                    <span class="shot-label">Main Interface</span>
+            <div class="screenshots-gallery" id="screenshotsGallery">
+                <!-- Windows Screenshots -->
+                <div class="screenshots-panel active" data-panel="windows">
+                    <div class="screenshot-grid">
+                        <div class="screenshot-item large" data-aos>
+                            <div class="screenshot-frame">
+                                <img src="assets/screenshots/main.png" alt="Main Interface" loading="lazy">
+                            </div>
+                            <div class="screenshot-label">Main Interface</div>
+                        </div>
+                        <div class="screenshot-item" data-aos>
+                            <div class="screenshot-frame">
+                                <img src="assets/screenshots/senate.png" alt="Devil's Senate" loading="lazy">
+                            </div>
+                            <div class="screenshot-label">Devil's Senate</div>
+                        </div>
+                        <div class="screenshot-item" data-aos>
+                            <div class="screenshot-frame">
+                                <img src="assets/screenshots/personalities.png" alt="Personalities" loading="lazy">
+                            </div>
+                            <div class="screenshot-label">40+ Personalities</div>
+                        </div>
+                        <div class="screenshot-item" data-aos>
+                            <div class="screenshot-frame">
+                                <img src="assets/screenshots/manager.png" alt="Model Manager" loading="lazy">
+                            </div>
+                            <div class="screenshot-label">Model Manager</div>
+                        </div>
+                        <div class="screenshot-item" data-aos>
+                            <div class="screenshot-frame">
+                                <img src="assets/screenshots/rag.png" alt="Knowledge Base" loading="lazy">
+                            </div>
+                            <div class="screenshot-label">Knowledge Base</div>
+                        </div>
+                        <div class="screenshot-item" data-aos>
+                            <div class="screenshot-frame">
+                                <img src="assets/screenshots/boot.png" alt="Boot Screen" loading="lazy">
+                            </div>
+                            <div class="screenshot-label">System Boot</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="screenshot-item">
-                    <img src="assets/screenshots/senate.png" alt="Devil's Senate" loading="lazy">
-                    <span class="shot-label">Devil's Senate</span>
-                </div>
-                <div class="screenshot-item">
-                    <img src="assets/screenshots/personalities.png" alt="Personalities" loading="lazy">
-                    <span class="shot-label">40+ Personalities</span>
-                </div>
-                <div class="screenshot-item">
-                    <img src="assets/screenshots/manager.png" alt="Model Manager" loading="lazy">
-                    <span class="shot-label">Model Manager</span>
-                </div>
-                <div class="screenshot-item">
-                    <img src="assets/screenshots/rag.png" alt="Knowledge Base" loading="lazy">
-                    <span class="shot-label">Knowledge Base</span>
-                </div>
-                <div class="screenshot-item">
-                    <img src="assets/screenshots/boot.png" alt="Boot Screen" loading="lazy">
-                    <span class="shot-label">System Boot</span>
+                
+                <!-- iOS Screenshots -->
+                <div class="screenshots-panel" data-panel="ios">
+                    <div class="ios-coming-soon">
+                        <div class="ios-coming-icon">📱</div>
+                        <h3>iOS Screenshots Coming Soon</h3>
+                        <p>The iOS app is in final development. Screenshots will be available when we launch on the App Store.</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Questions?</span>
+                <h2 class="section-title">FAQ</h2>
+            </div>
             
-            <div class="screenshot-gallery hidden" id="iosScreenshots">
-                <div class="ios-coming-soon">
-                    <span class="ios-cs-icon">📱</span>
-                    <h3>iOS Screenshots Coming Soon</h3>
-                    <p>The iOS app is in final development. Screenshots will be available shortly.</p>
+            <div class="faq-list">
+                <div class="faq-item glass-card" data-aos>
+                    <button class="faq-question">
+                        <span>What AI models can I use?</span>
+                        <div class="faq-icon">
+                            <span class="faq-plus"></span>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The Windows app supports any GGUF-format model from Hugging Face. Popular choices include Llama 3, Mistral, Phi-3, and our custom Red Angel Unchained model. The iOS app uses Apple's MLX framework with optimized on-device models.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" data-aos>
+                    <button class="faq-question">
+                        <span>Do I need a powerful computer?</span>
+                        <div class="faq-icon">
+                            <span class="faq-plus"></span>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>For Windows: 8GB RAM minimum, 16GB recommended. An NVIDIA GPU helps but isn't required. Smaller models (7B parameters) run fine on modest hardware. For iOS: Any iPhone or iPad with iOS 17+ works.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" data-aos>
+                    <button class="faq-question">
+                        <span>Is my data really private?</span>
+                        <div class="faq-icon">
+                            <span class="faq-plus"></span>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. Both apps run 100% offline. There's no server to send data to. No analytics. No telemetry. No accounts. Your conversations, journals, and files never leave your device. Ever.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" data-aos>
+                    <button class="faq-question">
+                        <span>What is the Devil's Senate?</span>
+                        <div class="faq-icon">
+                            <span class="faq-plus"></span>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>It's a unique feature in the Windows app where you can load up to 6 different AI models, each with a distinct role. When you ask a question, they debate it from different perspectives before giving you a final verdict. Think of it as having 6 advisors instead of one.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" data-aos>
+                    <button class="faq-question">
+                        <span>Are the apps free?</span>
+                        <div class="faq-icon">
+                            <span class="faq-plus"></span>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The Windows app is completely free. The iOS app will have a free tier with optional premium features. No subscriptions, no API costs, no hidden fees.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" data-aos>
+                    <button class="faq-question">
+                        <span>Can I sync between Windows and iOS?</span>
+                        <div class="faq-icon">
+                            <span class="faq-plus"></span>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Currently, the apps are separate and don't sync. This is intentional — syncing would require cloud servers, which would compromise privacy. Each app is designed for its own use case.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="section roadmap-section" id="roadmap">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">What's Next</span>
+                <h2 class="section-title">Roadmap</h2>
+            </div>
+            
+            <div class="roadmap-timeline">
+                <div class="timeline-line"></div>
+                <div class="roadmap-item completed" data-aos>
+                    <div class="roadmap-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-pulse"></div>
+                    </div>
+                    <div class="roadmap-content glass-card">
+                        <span class="roadmap-date">Released</span>
+                        <h4>Windows App v1.0</h4>
+                        <p>Devil's Senate, 40+ personalities, RAG, Code Sandbox, 11 themes</p>
+                    </div>
+                </div>
+                <div class="roadmap-item current" data-aos>
+                    <div class="roadmap-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-pulse"></div>
+                    </div>
+                    <div class="roadmap-content glass-card">
+                        <span class="roadmap-date">Q1 2026</span>
+                        <h4>iOS App Launch</h4>
+                        <p>Journal, Oracle, Dreams, Time Capsules, Mood Tracking</p>
+                    </div>
+                </div>
+                <div class="roadmap-item" data-aos>
+                    <div class="roadmap-marker">
+                        <div class="marker-dot"></div>
+                    </div>
+                    <div class="roadmap-content glass-card">
+                        <span class="roadmap-date">Q2 2026</span>
+                        <h4>Windows v2.0</h4>
+                        <p>Voice input, Image generation, Plugin system</p>
+                    </div>
+                </div>
+                <div class="roadmap-item" data-aos>
+                    <div class="roadmap-marker">
+                        <div class="marker-dot"></div>
+                    </div>
+                    <div class="roadmap-content glass-card">
+                        <span class="roadmap-date">Q3 2026</span>
+                        <h4>macOS App</h4>
+                        <p>Native Apple Silicon support with MLX acceleration</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Community Section -->
-    <section class="community" id="community">
+    <section class="section community-section" id="community">
         <div class="container">
-            <div class="community-header">
-                <span class="section-tag">JOIN US</span>
-                <h2 class="section-title">🔗 Community</h2>
-                <p class="section-subtitle">Get support, share feedback, and connect with other users</p>
+            <div class="section-header">
+                <span class="section-label">Join Us</span>
+                <h2 class="section-title">Community</h2>
+                <p class="section-desc">Get help, share feedback, and connect with other users</p>
             </div>
             
-            <div class="social-grid">
-                <a href="https://x.com/i/communities/1983507349546357091" target="_blank" class="social-card primary">
-                    <span class="social-icon">𝕏</span>
-                    <div class="social-info">
-                        <span class="social-name">X Community</span>
-                        <span class="social-desc">Join discussions & get updates</span>
+            <div class="community-grid">
+                <a href="https://x.com/i/communities/1983507349546357091" target="_blank" class="community-card primary glass-card" data-aos>
+                    <div class="community-icon">𝕏</div>
+                    <div class="community-info">
+                        <span class="community-name">X Community</span>
+                        <span class="community-desc">Join discussions & get updates</span>
                     </div>
+                    <svg class="community-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="https://x.com/shayzxbt" target="_blank" class="social-card">
-                    <span class="social-icon">𝕏</span>
-                    <div class="social-info">
-                        <span class="social-name">@shayzxbt</span>
-                        <span class="social-desc">Follow the creator</span>
+                <a href="https://x.com/shayzxbt" target="_blank" class="community-card glass-card" data-aos>
+                    <div class="community-icon">𝕏</div>
+                    <div class="community-info">
+                        <span class="community-name">@shayzxbt</span>
+                        <span class="community-desc">Follow the creator</span>
                     </div>
+                    <svg class="community-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="https://huggingface.co/shayzinasimulation/red-angel-unchained" target="_blank" class="social-card">
-                    <span class="social-icon">🤗</span>
-                    <div class="social-info">
-                        <span class="social-name">Hugging Face</span>
-                        <span class="social-desc">Models & documentation</span>
+                <a href="https://huggingface.co/shayzinasimulation/red-angel-unchained" target="_blank" class="community-card glass-card" data-aos>
+                    <div class="community-icon">🤗</div>
+                    <div class="community-info">
+                        <span class="community-name">Hugging Face</span>
+                        <span class="community-desc">Models & documentation</span>
                     </div>
+                    <svg class="community-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
             </div>
         </div>
@@ -518,38 +940,63 @@
 
     <!-- Footer -->
     <footer class="footer">
+        <div class="footer-bg">
+            <div class="footer-gradient"></div>
+        </div>
         <div class="container">
             <div class="footer-main">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="assets/logo.png" alt="Red Angel" class="footer-logo-img">
-                        <span class="logo-text">RED ANGEL</span>
+                        <img src="assets/logo.png" alt="Red Angel">
+                        <span>RED ANGEL</span>
                     </div>
                     <p class="footer-tagline">Private AI That Never Phones Home</p>
+                    <div class="footer-social">
+                        <a href="https://x.com/shayzxbt" target="_blank" class="social-btn">𝕏</a>
+                        <a href="https://huggingface.co/shayzinasimulation/red-angel-unchained" target="_blank" class="social-btn">🤗</a>
+                    </div>
                 </div>
                 
                 <div class="footer-links">
                     <div class="footer-col">
                         <h5>Apps</h5>
-                        <a href="#windows">Windows App</a>
-                        <a href="#ios">iOS App</a>
+                        <a href="#windows">Windows</a>
+                        <a href="#ios">iOS</a>
                         <a href="#screenshots">Screenshots</a>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Resources</h5>
+                        <a href="#why">Why Offline</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#roadmap">Roadmap</a>
                     </div>
                     <div class="footer-col">
                         <h5>Community</h5>
                         <a href="https://x.com/i/communities/1983507349546357091" target="_blank">X Community</a>
                         <a href="https://x.com/shayzxbt" target="_blank">@shayzxbt</a>
-                        <a href="https://huggingface.co/shayzinasimulation/red-angel-unchained" target="_blank">Hugging Face</a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p class="footer-copy">Made with ❤️ by <strong>Shayz Productions</strong></p>
+                <p>Made with ❤️ by <strong>Shayz Productions</strong></p>
                 <p class="footer-privacy">No data collection. No tracking. Ever.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <div class="lightbox-content">
+            <img class="lightbox-image" id="lightboxImage" src="" alt="">
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
