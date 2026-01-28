@@ -348,7 +348,7 @@ function initCounters() {
 // ============================================
 function initScrollAnimations() {
     const elements = document.querySelectorAll(
-        '.feature-card, .why-card, .faq-item, .roadmap-item, .community-card, .screenshot-item, [data-aos]'
+        '.feature-card, .why-card, .faq-item, .roadmap-item, .community-card, .screenshot-item, .ios-screenshot-card, [data-aos]'
     );
     
     const observer = new IntersectionObserver((entries) => {
@@ -357,7 +357,7 @@ function initScrollAnimations() {
                 // Stagger animations for grid items
                 const parent = entry.target.parentElement;
                 const siblings = parent ? Array.from(parent.children).filter(
-                    child => child.matches('.feature-card, .why-card, .screenshot-item')
+                    child => child.matches('.feature-card, .why-card, .screenshot-item, .ios-screenshot-card')
                 ) : [];
                 const index = siblings.indexOf(entry.target);
                 const delay = index >= 0 ? index * 80 : 0;
@@ -455,7 +455,7 @@ function initLightbox() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
     const closeBtn = document.querySelector('.lightbox-close');
-    const screenshots = document.querySelectorAll('.screenshot-item img');
+    const screenshots = document.querySelectorAll('.screenshot-item img, .ios-phone-frame img');
     
     if (!lightbox || !lightboxImage) return;
     
