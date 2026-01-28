@@ -1,5 +1,5 @@
 // ============================================
-// RED ANGEL SENATE - WEBSITE SCRIPTS
+// RED ANGEL - WEBSITE SCRIPTS
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,24 +7,51 @@ document.addEventListener('DOMContentLoaded', () => {
     initParticles();
     initNavScroll();
     initSmoothScroll();
-    initCounters();
+    initMobileMenu();
     initScrollAnimations();
+    initScreenshotTabs();
 });
 
-// Loading Screen
+// Enhanced Loading Screen
 function initLoader() {
     const loader = document.getElementById('loadingScreen');
+    const statusText = document.getElementById('loadingStatus');
+    
+    const statuses = [
+        'INITIALIZING SYSTEMS',
+        'LOADING NEURAL CORES',
+        'CALIBRATING AI ENGINE',
+        'ESTABLISHING SECURE CONNECTION',
+        'DECRYPTING PROTOCOLS',
+        'READY'
+    ];
+    
+    let statusIndex = 0;
+    
+    // Cycle through status messages
+    const statusInterval = setInterval(() => {
+        statusIndex++;
+        if (statusIndex < statuses.length && statusText) {
+            statusText.textContent = statuses[statusIndex];
+        }
+    }, 450);
     
     window.addEventListener('load', () => {
         setTimeout(() => {
-            loader.classList.add('hidden');
+            clearInterval(statusInterval);
+            if (statusText) statusText.textContent = 'LAUNCHING';
+            
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 300);
         }, 2500);
     });
     
     // Fallback
     setTimeout(() => {
+        clearInterval(statusInterval);
         loader.classList.add('hidden');
-    }, 4000);
+    }, 4500);
 }
 
 // Floating Particles
@@ -32,14 +59,14 @@ function initParticles() {
     const container = document.getElementById('particles');
     if (!container) return;
     
-    const particleCount = 40;
+    const particleCount = 35;
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         particle.style.cssText = `
             left: ${Math.random() * 100}%;
-            animation-duration: ${Math.random() * 15 + 10}s;
+            animation-duration: ${Math.random() * 15 + 12}s;
             animation-delay: ${Math.random() * 15}s;
             width: ${Math.random() * 4 + 2}px;
             height: ${Math.random() * 4 + 2}px;
@@ -48,25 +75,20 @@ function initParticles() {
     }
 }
 
-// Navigation Scroll
+// Navigation Scroll Effect
 function initNavScroll() {
     const nav = document.getElementById('nav');
-    let lastScroll = 0;
     
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 100) {
+        if (window.pageYOffset > 100) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
-        
-        lastScroll = currentScroll;
     });
 }
 
-// Smooth Scroll
+// Smooth Scroll for Anchor Links
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -76,6 +98,14 @@ function initSmoothScroll() {
             
             const target = document.querySelector(targetId);
             if (target) {
+                // Close mobile menu if open
+                const navLinks = document.getElementById('navLinks');
+                const mobileBtn = document.getElementById('mobileMenuBtn');
+                if (navLinks && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    if (mobileBtn) mobileBtn.textContent = '☰';
+                }
+                
                 const offset = 80;
                 const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
                 
@@ -88,45 +118,23 @@ function initSmoothScroll() {
     });
 }
 
-// Counter Animation
-function initCounters() {
-    const counters = document.querySelectorAll('.counter');
+// Mobile Menu Toggle
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
     
-    const animateCounter = (counter) => {
-        const target = parseInt(counter.dataset.target);
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-        
-        const updateCounter = () => {
-            current += step;
-            if (current < target) {
-                counter.textContent = Math.floor(current);
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target;
-            }
-        };
-        
-        updateCounter();
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                observer.unobserve(entry.target);
-            }
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
         });
-    }, { threshold: 0.5 });
-    
-    counters.forEach(counter => observer.observe(counter));
+    }
 }
 
 // Scroll Animations
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll(
-        '.feature-card, .mode-card, .coming-card, .about-feature, .screenshot-item, .social-card, .download-btn, .app-card'
+        '.feature-card, .app-overview-card, .social-card, .screenshot-item, .feature-highlight, .privacy-banner, .platform-download'
     );
     
     const observer = new IntersectionObserver((entries) => {
@@ -151,47 +159,56 @@ function initScrollAnimations() {
     });
 }
 
-// Mobile Menu (if needed)
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinks = document.getElementById('navLinks');
-
-if (mobileMenuBtn && navLinks) {
-    mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+// Screenshot Tab Switching
+function initScreenshotTabs() {
+    const tabs = document.querySelectorAll('.screenshot-tab');
+    const windowsGallery = document.getElementById('windowsScreenshots');
+    const iosGallery = document.getElementById('iosScreenshots');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Update active tab
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // Show/hide galleries
+            const targetTab = tab.dataset.tab;
+            
+            if (targetTab === 'windows') {
+                windowsGallery.classList.remove('hidden');
+                iosGallery.classList.add('hidden');
+            } else {
+                windowsGallery.classList.add('hidden');
+                iosGallery.classList.remove('hidden');
+            }
+        });
     });
 }
 
 // Console Easter Egg
 console.log(`
-%c 😈 RED ANGEL SENATE 😈 
+%c 😈 RED ANGEL 😈 
 %c ═══════════════════════════════════════
-%c Your Private AI Command Center
-%c Six Minds. One Question. No Limits.
+%c Private AI for Windows & iOS
+%c No Cloud. No Tracking. Your Data.
 %c ═══════════════════════════════════════
+
+%c 🖥️  Windows: Devil's Senate Command Center
+%c 📱  iOS: Personal AI Companion
 
 %c ⬇️  Download: https://redangel.fun
 %c 𝕏  Community: https://x.com/i/communities/1983507349546357091
-%c 🤗 Hugging Face: https://huggingface.co/shayzinasimulation
 
 %c Made with ❤️ by Shayz Productions
-%c No data collection. No tracking. Ever.
 `,
 'color: #ff2d2d; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px #ff2d2d;',
 'color: #ff2d2d;',
 'color: #ffffff; font-size: 14px;',
 'color: #ff6b6b; font-size: 12px; font-style: italic;',
 'color: #ff2d2d;',
+'color: #ff6b6b; font-size: 12px;',
+'color: #007AFF; font-size: 12px;',
 'color: #00ff88; font-size: 12px;',
 'color: #00ff88; font-size: 12px;',
-'color: #00ff88; font-size: 12px;',
-'color: #ffd700; font-size: 11px; margin-top: 10px;',
-'color: #666666; font-size: 10px;'
+'color: #ffd700; font-size: 11px; margin-top: 10px;'
 );
-
-// Keyboard shortcut to open dev tools message
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-        console.log('%c 👋 Welcome, fellow developer!', 'color: #ff2d2d; font-size: 16px;');
-    }
-});
