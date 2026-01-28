@@ -2085,6 +2085,171 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     margin: 0 auto;
 }
 
+/* iOS Showcase */
+.ios-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    margin-bottom: 80px;
+}
+
+.ios-feature-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .ios-feature-item {
+        grid-template-columns: 1fr 1fr;
+    }
+    .ios-feature-item.reverse .ios-feature-content { order: 2; }
+    .ios-feature-item.reverse .ios-feature-visual { order: 1; }
+}
+
+.ios-feature-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--blue);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.ios-feature-title {
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.ios-feature-desc {
+    font-size: 16px;
+    color: var(--gray-400);
+    margin-bottom: 24px;
+    line-height: 1.7;
+}
+
+.ios-feature-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ios-feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--gray-300);
+}
+
+.ios-feature-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.iphone-frame-small {
+    width: 220px;
+    height: 460px;
+    background: #1a1a1e;
+    border-radius: 32px;
+    border: 4px solid #333;
+    padding: 8px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.iphone-frame-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+.feature-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    filter: blur(60px);
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.purple-glow { background: var(--purple); }
+.blue-glow { background: var(--blue); }
+.gold-glow { background: #ffd700; }
+
+/* Extra Gallery */
+.ios-extra-gallery {
+    margin-top: 100px;
+}
+
+.gallery-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: var(--gray-300);
+}
+
+.scroll-container {
+    overflow-x: auto;
+    padding: 20px 0 40px;
+    scrollbar-width: none; /* Firefox */
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.scroll-track {
+    display: flex;
+    gap: 24px;
+    padding: 0 20px;
+}
+
+.scroll-item {
+    flex: 0 0 180px;
+    text-align: center;
+    transition: transform 0.3s var(--ease);
+}
+
+.scroll-item:hover {
+    transform: translateY(-10px);
+}
+
+.scroll-item img {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.scroll-item span {
+    font-size: 12px;
+    color: var(--gray-500);
+    font-family: var(--font-mono);
+}
+
+.more-screenshots-note {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 14px;
+    color: var(--gray-500);
+    font-family: var(--font-mono);
+}
+
 /* ============================================
    FAQ
    ============================================ */
