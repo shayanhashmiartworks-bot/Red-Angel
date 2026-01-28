@@ -3,481 +3,709 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Red Angel Senate | Retro Horror Command Center</title>
-    <meta name="description" content="Red Angel Senate - a private, offline AI command center. Six minds debate your prompts. No cloud. No telemetry.">
-    <meta name="keywords" content="Red Angel, AI, offline, local LLM, Devil's Senate, retro horror, GGUF, council, debate">
+    <title>Red Angel | Your Private AI Command Center</title>
+    <meta name="description" content="Red Angel - Private offline AI apps for Windows and iOS. Devil's Senate multi-agent council on desktop. Personal AI companion on mobile. No cloud. No tracking.">
+    <meta name="keywords" content="Red Angel, AI, offline, private, local LLM, Devil's Senate, iOS app, Windows app, journal, uncensored, GGUF, multi-agent">
     <meta name="author" content="Shayz Productions">
-
-    <meta property="og:title" content="Red Angel Senate | Retro Horror Command Center">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Red Angel | Your Private AI Command Center">
     <meta property="og:description" content="Six minds. One question. No limits. Private AI that never phones home.">
     <meta property="og:image" content="assets/og-image.png">
     <meta property="og:url" content="https://redangel.fun">
     <meta property="og:type" content="website">
-
+    
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@shayzxbt">
-    <meta name="twitter:title" content="Red Angel Senate | Retro Horror Command Center">
+    <meta name="twitter:title" content="Red Angel | Your Private AI Command Center">
     <meta name="twitter:description" content="Six minds. One question. No limits.">
-
+    
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loader">
             <div class="loader-icon">
                 <img src="assets/logo.png" alt="Red Angel" class="loader-logo">
             </div>
-            <div class="loader-text">BOOTING THE PIT</div>
-            <div class="loader-bar"><div class="loader-progress"></div></div>
+            <div class="loader-text">INITIALIZING</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
         </div>
     </div>
 
-    <div class="grain"></div>
+    <!-- Scanlines Overlay -->
     <div class="scanlines"></div>
+    
+    <!-- Floating Particles -->
     <div class="particles" id="particles"></div>
+    
+    <!-- Ambient Glow -->
+    <div class="ambient-glow"></div>
 
+    <!-- Navigation -->
     <nav class="nav" id="nav">
-        <div class="nav-brand">
+        <div class="nav-logo">
             <img src="assets/logo.png" alt="Red Angel" class="logo-img">
-            <div class="wordmark">
-                <span class="brand">RED ANGEL</span>
-                <span class="sub">SENATE</span>
-            </div>
+            <span class="logo-text">RED ANGEL</span>
         </div>
-        <button class="nav-mobile-btn" id="mobileMenuBtn">☰</button>
         <div class="nav-links" id="navLinks">
-            <a href="#hero">Home</a>
             <a href="#about">About</a>
             <a href="#senate">Senate</a>
             <a href="#features">Features</a>
-            <a href="#screenshots">Showcase</a>
-            <a href="#download" class="pill pill-ghost">Download</a>
+            <a href="#screenshots">Screenshots</a>
+            <a href="#download">Download</a>
+        </div>
+        <div class="nav-right">
+            <a href="https://x.com/i/communities/1983507349546357091" target="_blank" class="nav-community">
+                <span>𝕏</span> Community
+            </a>
+            <button class="nav-mobile-btn" id="mobileMenuBtn">☰</button>
         </div>
     </nav>
 
-    <main>
-        <section class="hero" id="hero">
-            <div class="ambient-glow"></div>
-            <div class="container hero-grid">
-                <div class="hero-copy">
-                    <p class="eyebrow">OFFLINE • RETRO HORROR • MINIMAL</p>
-                    <h1>Private AI command <span class="accent">from the pit</span></h1>
-                    <p class="lede">Six minds that argue, scheme, and deliver a final verdict — without touching the cloud or phoning home.</p>
-                    <div class="chips">
-                        <span class="chip">🔒 100% offline</span>
-                        <span class="chip">🛰️ zero telemetry</span>
-                        <span class="chip">⛧ 12 council modes</span>
-                    </div>
-                    <div class="hero-cta">
-                        <a class="btn btn-primary btn-glow" href="#download">Download Free</a>
-                        <a class="btn btn-ghost" href="#senate">Meet the Senate</a>
-                    </div>
-                    <div class="metrics">
-                        <div class="metric">
-                            <span class="metric-value counter" data-target="6">0</span>
-                            <span class="metric-label">AI seats</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value counter" data-target="12">0</span>
-                            <span class="metric-label">council modes</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">40+</span>
-                            <span class="metric-label">personalities</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">0</span>
-                            <span class="metric-label">data sent</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="frame">
-                        <div class="frame-head">
-                            <span class="dot red"></span>
-                            <span class="dot amber"></span>
-                            <span class="dot green"></span>
-                            <span class="frame-title">Red Angel / local</span>
-                        </div>
-                        <div class="frame-body">
-                            <img src="assets/screenshots/main.png" alt="Red Angel interface" class="frame-img">
-                            <div class="frame-overlay"></div>
-                        </div>
-                    </div>
-                    <div class="floating-card">
-                        <div class="floating-title">Devil's Senate</div>
-                        <ul class="floating-list">
-                            <li>Devil's Advocate — challenges everything</li>
-                            <li>The Architect — designs the plan</li>
-                            <li>The Wildcard — breaks the pattern</li>
-                            <li>The Scholar — cites receipts</li>
-                            <li>The Empath — human filter</li>
-                            <li>The Executioner — final call</li>
-                        </ul>
-                    </div>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-grid"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-badge animate-in">
+                <span class="badge-icon">🔒</span>
+                <span>100% OFFLINE</span>
+                <span class="badge-separator">•</span>
+                <span>ZERO TRACKING</span>
+                <span class="badge-separator">•</span>
+                <span>YOUR DATA</span>
             </div>
-        </section>
+            
+            <h1 class="hero-title animate-in delay-1">
+                <span class="title-line">
+                    <span class="title-red glitch" data-text="RED">RED</span>
+                    <span class="title-white">ANGEL</span>
+                </span>
+            </h1>
+            
+            <p class="hero-tagline animate-in delay-2">Your Private AI Command Center</p>
+            
+            <p class="hero-quote animate-in delay-2">Be Part Of Something</p>
+            
+            <p class="hero-subtitle animate-in delay-3">
+                <span class="subtitle-highlight">Six Minds.</span>
+                <span class="subtitle-highlight">One Question.</span>
+                <span class="subtitle-highlight">No Limits.</span>
+            </p>
+            
+            <div class="hero-cta animate-in delay-4">
+                <a href="#download" class="btn btn-primary btn-glow">
+                    <span class="btn-icon">⬇️</span>
+                    <span class="btn-text">DOWNLOAD FREE</span>
+                    <span class="btn-shine"></span>
+                </a>
+                <a href="#senate" class="btn btn-secondary">
+                    <span class="btn-icon">⛧</span>
+                    <span class="btn-text">ENTER THE SENATE</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="hero-visual animate-in delay-3">
+            <div class="hero-mockup">
+                <div class="mockup-frame">
+                    <div class="mockup-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="mockup-title">Red Angel v1.0</span>
+                    </div>
+                    <div class="mockup-screen">
+                        <img src="assets/screenshots/main.png" alt="Red Angel Interface" class="mockup-img">
+                    </div>
+                </div>
+                <div class="mockup-glow"></div>
+            </div>
+        </div>
+        
+        <div class="hero-stats animate-in delay-5">
+            <div class="stat">
+                <span class="stat-value counter" data-target="2">0</span>
+                <span class="stat-label">Apps</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-value counter" data-target="6">0</span>
+                <span class="stat-label">AI Seats</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-value">40+</span>
+                <span class="stat-label">Personalities</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-value">0</span>
+                <span class="stat-label">Data Sent</span>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span class="scroll-text">SCROLL</span>
+            <span class="scroll-arrow">▼</span>
+        </div>
+    </section>
 
-        <section class="manifesto" id="about">
-            <div class="container two-col">
-                <div class="stack">
-                    <span class="section-tag">ABOUT</span>
-                    <h2>Not a friendly chatbot.</h2>
-                    <p class="body">Red Angel is a sealed, offline war-room for your prompts. Your files never leave your machine. No telemetry, no analytics, no overlords.</p>
-                    <div class="list">
-                        <div class="list-item">Runs local GGUF models with GPU acceleration.</div>
-                        <div class="list-item">Council of personalities that fight for the best answer.</div>
-                        <div class="list-item">Switch personas, themes, and modes on the fly.</div>
-                    </div>
-                </div>
-                <div class="feature-cards">
-                    <div class="feature-card">
-                        <div class="badge">🔒</div>
-                        <div>
-                            <h3>Zero Cloud</h3>
-                            <p>Completely local runtime, audit-friendly.</p>
-                        </div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="badge">📡</div>
-                        <div>
-                            <h3>No Telemetry</h3>
-                            <p>No tracking pixels, no analytics, no leaky calls.</p>
-                        </div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="badge">🌑</div>
-                        <div>
-                            <h3>Retro Horror Skin</h3>
-                            <p>CRT grain, blood-red glow, brutal minimal layout.</p>
-                        </div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="badge">🪓</div>
-                        <div>
-                            <h3>Uncensored Option</h3>
-                            <p>Opt-in NSFW mode. Your rules, your consequences.</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-header">
+                <span class="section-tag">ABOUT</span>
+                <h2 class="section-title">💀 NOT JUST ANOTHER CHATBOT</h2>
             </div>
-        </section>
-
-        <section class="senate" id="senate">
-            <div class="container">
-                <div class="section-head">
-                    <span class="section-tag">THE PIT</span>
-                    <h2>Devil's Senate</h2>
-                    <p class="body">Load six models into six seats. Ask one question. Watch them argue, converge, and deliver a final ruling.</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-lead">
+                        Red Angel doesn't ask permission.<br>
+                        It doesn't phone home.<br>
+                        It doesn't judge.
+                    </p>
+                    <p class="about-desc">
+                        It runs entirely on <strong>YOUR machine</strong>. YOUR rules. YOUR data stays with YOU.
+                    </p>
+                    <p class="about-desc">
+                        This isn't a wrapper. This isn't a cloud proxy. This is a <strong>full command center</strong> with a council of AI personalities that debate, brainstorm, interrogate, and decide — all running locally.
+                    </p>
                 </div>
-                <div class="senate-grid">
-                    <div class="ring">
-                        <div class="ring-center">
-                            <span class="sigil">⛧</span>
-                            <p>COUNCIL ACTIVE</p>
-                        </div>
-                        <div class="seat-row">
-                            <div class="seat-card">
-                                <span class="seat-icon">😈</span>
-                                <div>
-                                    <p class="seat-name">Devil's Advocate</p>
-                                    <p class="seat-role">Challenges everything</p>
-                                </div>
-                            </div>
-                            <div class="seat-card">
-                                <span class="seat-icon">🏗️</span>
-                                <div>
-                                    <p class="seat-name">The Architect</p>
-                                    <p class="seat-role">Structures the plan</p>
-                                </div>
-                            </div>
-                            <div class="seat-card">
-                                <span class="seat-icon">🃏</span>
-                                <div>
-                                    <p class="seat-name">The Wildcard</p>
-                                    <p class="seat-role">Breaks patterns</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="seat-row">
-                            <div class="seat-card">
-                                <span class="seat-icon">📚</span>
-                                <div>
-                                    <p class="seat-name">The Scholar</p>
-                                    <p class="seat-role">Cites sources</p>
-                                </div>
-                            </div>
-                            <div class="seat-card">
-                                <span class="seat-icon">💖</span>
-                                <div>
-                                    <p class="seat-name">The Empath</p>
-                                    <p class="seat-role">Human filter</p>
-                                </div>
-                            </div>
-                            <div class="seat-card">
-                                <span class="seat-icon">⚔️</span>
-                                <div>
-                                    <p class="seat-name">Executioner</p>
-                                    <p class="seat-role">Calls the verdict</p>
-                                </div>
-                            </div>
+                
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="af-icon">🔒</div>
+                        <div class="af-content">
+                            <h4>Zero Cloud</h4>
+                            <p>Everything runs on your machine</p>
                         </div>
                     </div>
-                    <div class="mode-stack">
-                        <h3>12 Council Modes</h3>
-                        <div class="mode-chips">
-                            <span class="mode-chip">Round Table</span>
-                            <span class="mode-chip">Debate</span>
-                            <span class="mode-chip">Consensus</span>
-                            <span class="mode-chip">Hierarchy</span>
-                            <span class="mode-chip">Chaos</span>
-                            <span class="mode-chip">Interrogation</span>
-                            <span class="mode-chip">Tag Team</span>
-                            <span class="mode-chip">Jury</span>
-                            <span class="mode-chip">Brainstorm</span>
-                            <span class="mode-chip">Roleplay</span>
-                            <span class="mode-chip">Interview</span>
-                            <span class="mode-chip">Tournament</span>
-                        </div>
-                        <p class="body subtle">Every seat is swappable. Drop in different models and watch the dynamics change.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="features" id="features">
-            <div class="container">
-                <div class="section-head">
-                    <span class="section-tag">THE STACK</span>
-                    <h2>What comes in the box</h2>
-                </div>
-                <div class="feature-grid">
-                    <article class="tile">
-                        <p class="tile-kicker">📚 RAG</p>
-                        <h3>Knowledge Base</h3>
-                        <p class="body">Index PDFs, docs, markdown, and chat locally with semantic search.</p>
-                    </article>
-                    <article class="tile">
-                        <p class="tile-kicker">🧪 Lab</p>
-                        <h3>Prompt builder</h3>
-                        <p class="body">Visual variables, templates, A/B testing. Ship prompts that stick.</p>
-                    </article>
-                    <article class="tile">
-                        <p class="tile-kicker">🌳 Branch</p>
-                        <h3>Conversation forking</h3>
-                        <p class="body">Clone threads, explore alternatives, merge the best responses.</p>
-                    </article>
-                    <article class="tile">
-                        <p class="tile-kicker">💻 Sandbox</p>
-                        <h3>Code runner</h3>
-                        <p class="body">Execute JS, Python, and shell inside the app. Test ideas instantly.</p>
-                    </article>
-                    <article class="tile">
-                        <p class="tile-kicker">🎭 Personas</p>
-                        <h3>40+ characters</h3>
-                        <p class="body">Swap archetypes or build your own villains, guides, and muses.</p>
-                    </article>
-                    <article class="tile">
-                        <p class="tile-kicker">🎨 Themes</p>
-                        <h3>11 retro skins</h3>
-                        <p class="body">Blood Moon, Synthwave, Game Boy, DOS amber, and more.</p>
-                    </article>
-                    <article class="tile">
-                        <p class="tile-kicker">📦 Manager</p>
-                        <h3>Model control</h3>
-                        <p class="body">Download, organize, and switch GGUF models with drag-and-drop.</p>
-                    </article>
-                    <article class="tile">
-                        <p class="tile-kicker">⚡ GPU</p>
-                        <h3>Acceleration</h3>
-                        <p class="body">CUDA-ready for NVIDIA. Auto-detect hardware and optimize loads.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="showcase" id="screenshots">
-            <div class="container">
-                <div class="section-head">
-                    <span class="section-tag">SHOWCASE</span>
-                    <h2>See it in action</h2>
-                </div>
-                <div class="gallery">
-                    <figure class="shot">
-                        <img src="assets/screenshots/main.png" alt="Main interface" loading="lazy">
-                        <figcaption>Main Interface</figcaption>
-                    </figure>
-                    <figure class="shot">
-                        <img src="assets/screenshots/senate.png" alt="Devil's Senate" loading="lazy">
-                        <figcaption>Devil's Senate</figcaption>
-                    </figure>
-                    <figure class="shot">
-                        <img src="assets/screenshots/personalities.png" alt="Personalities" loading="lazy">
-                        <figcaption>40+ Personalities</figcaption>
-                    </figure>
-                    <figure class="shot">
-                        <img src="assets/screenshots/manager.png" alt="Model Manager" loading="lazy">
-                        <figcaption>Model Manager</figcaption>
-                    </figure>
-                    <figure class="shot">
-                        <img src="assets/screenshots/rag.png" alt="Knowledge Base" loading="lazy">
-                        <figcaption>Knowledge Base</figcaption>
-                    </figure>
-                    <figure class="shot">
-                        <img src="assets/screenshots/boot.png" alt="Boot Screen" loading="lazy">
-                        <figcaption>System Boot</figcaption>
-                    </figure>
-                </div>
-            </div>
-        </section>
-
-        <section class="roadmap" id="coming">
-            <div class="container">
-                <div class="section-head">
-                    <span class="section-tag">ON DECK</span>
-                    <h2>Incoming signals</h2>
-                    <p class="body">Early adopters get the coming horrors free.</p>
-                </div>
-                <div class="roadmap-grid">
-                    <div class="card">
-                        <div class="pill">Q1 2025</div>
-                        <h3>Voice Prompts</h3>
-                        <p class="body">Speak to the council. Hear their verdicts back.</p>
-                    </div>
-                    <div class="card">
-                        <div class="pill">Q2 2025</div>
-                        <h3>Image Generation</h3>
-                        <p class="body">Local Stable Diffusion. No watermarks, no limits.</p>
-                    </div>
-                    <div class="card">
-                        <div class="pill">Q3 2025</div>
-                        <h3>Video Generation</h3>
-                        <p class="body">Local video synthesis for storyboards and motion tests.</p>
-                    </div>
-                </div>
-                <div class="roadmap-cta">
-                    <p>Grab the build now and every future upgrade is yours.</p>
-                    <a class="btn btn-primary btn-glow" href="#download">Get Early Access</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="download" id="download">
-            <div class="container download-grid">
-                <div class="download-copy">
-                    <span class="section-tag">DOWNLOAD</span>
-                    <h2>Pick your poison</h2>
-                    <p class="body">One click install. Works offline. Everything included.</p>
-                    <div class="requirements">
-                        <div class="req">
-                            <span>💾 RAM</span>
-                            <p>8 GB min, 16 GB+ recommended</p>
-                        </div>
-                        <div class="req">
-                            <span>💿 Storage</span>
-                            <p>5 GB + space for models</p>
-                        </div>
-                        <div class="req">
-                            <span>🎮 GPU</span>
-                            <p>Optional — NVIDIA CUDA recommended</p>
+                    <div class="about-feature">
+                        <div class="af-icon">📡</div>
+                        <div class="af-content">
+                            <h4>Zero Telemetry</h4>
+                            <p>No tracking, no analytics, no data collection</p>
                         </div>
                     </div>
-                </div>
-                <div class="download-buttons">
-                    <a class="download-btn" href="#" data-platform="windows">
-                        <div class="dl-meta">
-                            <p class="dl-name">Windows</p>
-                            <p class="dl-detail">64-bit • ~150 MB</p>
+                    <div class="about-feature">
+                        <div class="af-icon">🌐</div>
+                        <div class="af-content">
+                            <h4>Works Offline</h4>
+                            <p>No internet required after download</p>
                         </div>
-                        <span class="dl-arrow">→</span>
-                    </a>
-                    <a class="download-btn" href="#" data-platform="macos">
-                        <div class="dl-meta">
-                            <p class="dl-name">macOS</p>
-                            <p class="dl-detail">Intel & Apple Silicon • ~150 MB</p>
-                        </div>
-                        <span class="dl-arrow">→</span>
-                    </a>
-                    <a class="download-btn" href="#" data-platform="linux">
-                        <div class="dl-meta">
-                            <p class="dl-name">Linux</p>
-                            <p class="dl-detail">AppImage • ~150 MB</p>
-                        </div>
-                        <span class="dl-arrow">→</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="community" id="community">
-            <div class="container">
-                <div class="section-head">
-                    <span class="section-tag">COMMUNITY</span>
-                    <h2>Keep the channel open</h2>
-                    <p class="body">Updates, support, and lore drops.</p>
-                </div>
-                <div class="socials">
-                    <a class="social-card primary" href="https://x.com/i/communities/1983507349546357091" target="_blank" rel="noreferrer">
-                        <span class="social-icon">𝕏</span>
-                        <div>
-                            <p class="social-title">X Community</p>
-                            <p class="social-desc">Join discussions & get updates</p>
-                        </div>
-                    </a>
-                    <a class="social-card" href="https://x.com/shayzxbt" target="_blank" rel="noreferrer">
-                        <span class="social-icon">𝕏</span>
-                        <div>
-                            <p class="social-title">@shayzxbt</p>
-                            <p class="social-desc">Follow the creator</p>
-                        </div>
-                    </a>
-                    <a class="social-card" href="https://huggingface.co/shayzinasimulation/red-angel-unchained" target="_blank" rel="noreferrer">
-                        <span class="social-icon">🤗</span>
-                        <div>
-                            <p class="social-title">Hugging Face</p>
-                            <p class="social-desc">Models & documentation</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <div class="footer-logo">
-                    <img src="assets/logo.png" alt="Red Angel" class="logo-img">
-                    <div class="wordmark">
-                        <span class="brand">RED ANGEL</span>
-                        <span class="sub">SENATE</span>
                     </div>
-                </div>
-                <p class="body subtle">Your private AI command center. No data collection. No tracking.</p>
-            </div>
-            <div class="footer-links">
-                <div>
-                    <p class="footer-title">Product</p>
-                    <a href="#features">Features</a>
-                    <a href="#senate">Devil's Senate</a>
-                    <a href="#download">Download</a>
-                    <a href="#screenshots">Showcase</a>
-                </div>
-                <div>
-                    <p class="footer-title">Community</p>
-                    <a href="https://x.com/i/communities/1983507349546357091" target="_blank" rel="noreferrer">X Community</a>
-                    <a href="https://x.com/shayzxbt" target="_blank" rel="noreferrer">@shayzxbt</a>
-                    <a href="https://huggingface.co/shayzinasimulation/red-angel-unchained" target="_blank" rel="noreferrer">Hugging Face</a>
+                    <div class="about-feature">
+                        <div class="af-icon">🔓</div>
+                        <div class="af-content">
+                            <h4>No Restrictions</h4>
+                            <p>Optional NSFW mode for unrestricted use</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p class="body subtle">Made with ❤️ by Shayz Productions</p>
+    </section>
+
+    <!-- Senate Section -->
+    <section class="senate" id="senate">
+        <div class="senate-bg"></div>
+        <div class="container">
+            <div class="senate-header">
+                <span class="section-tag">THE KILLER FEATURE</span>
+                <h2 class="section-title">⛧ DEVIL'S SENATE</h2>
+                <p class="section-subtitle">Load models into seats. Pose your question. Let them fight.</p>
+            </div>
+            
+            <div class="senate-main">
+                <div class="senate-visual">
+                    <div class="senate-ring">
+                        <div class="seat seat-1" data-seat="1">
+                            <div class="seat-inner">
+                                <img src="assets/logo.png" alt="Devil's Advocate" class="seat-logo">
+                            </div>
+                            <div class="seat-info">
+                                <span class="seat-name">Devil's Advocate</span>
+                                <span class="seat-role">Challenges everything</span>
+                            </div>
+                        </div>
+                        <div class="seat seat-2" data-seat="2">
+                            <div class="seat-inner">
+                                <span class="seat-icon">🏗️</span>
+                            </div>
+                            <div class="seat-info">
+                                <span class="seat-name">The Architect</span>
+                                <span class="seat-role">Plans & structures</span>
+                            </div>
+                        </div>
+                        <div class="seat seat-3" data-seat="3">
+                            <div class="seat-inner">
+                                <span class="seat-icon">🃏</span>
+                            </div>
+                            <div class="seat-info">
+                                <span class="seat-name">The Wildcard</span>
+                                <span class="seat-role">Creative chaos</span>
+                            </div>
+                        </div>
+                        <div class="seat seat-4" data-seat="4">
+                            <div class="seat-inner">
+                                <span class="seat-icon">📚</span>
+                            </div>
+                            <div class="seat-info">
+                                <span class="seat-name">The Scholar</span>
+                                <span class="seat-role">Facts & citations</span>
+                            </div>
+                        </div>
+                        <div class="seat seat-5" data-seat="5">
+                            <div class="seat-inner">
+                                <span class="seat-icon">💖</span>
+                            </div>
+                            <div class="seat-info">
+                                <span class="seat-name">The Empath</span>
+                                <span class="seat-role">Emotional intelligence</span>
+                            </div>
+                        </div>
+                        <div class="seat seat-6" data-seat="6">
+                            <div class="seat-inner">
+                                <span class="seat-icon">⚔️</span>
+                            </div>
+                            <div class="seat-info">
+                                <span class="seat-name">The Executioner</span>
+                                <span class="seat-role">Final decisions</span>
+                            </div>
+                        </div>
+                        
+                        <div class="senate-center">
+                            <div class="center-pulse"></div>
+                            <div class="center-inner">
+                                <span class="center-icon">⛧</span>
+                                <span class="center-text">THE PIT</span>
+                            </div>
+                        </div>
+                        
+                        <svg class="senate-connections" viewBox="0 0 400 400">
+                            <line x1="200" y1="50" x2="200" y2="200" class="connection"/>
+                            <line x1="330" y1="100" x2="200" y2="200" class="connection"/>
+                            <line x1="330" y1="300" x2="200" y2="200" class="connection"/>
+                            <line x1="200" y1="350" x2="200" y2="200" class="connection"/>
+                            <line x1="70" y1="300" x2="200" y2="200" class="connection"/>
+                            <line x1="70" y1="100" x2="200" y2="200" class="connection"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="senate-modes">
+                    <h3 class="modes-title">12 Council Modes</h3>
+                    <div class="modes-grid">
+                        <div class="mode-card">
+                            <span class="mode-icon">◆</span>
+                            <span class="mode-name">Round Table</span>
+                            <span class="mode-desc">Each responds in order</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">⚔</span>
+                            <span class="mode-name">Debate</span>
+                            <span class="mode-desc">Opposing viewpoints clash</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">☯</span>
+                            <span class="mode-name">Consensus</span>
+                            <span class="mode-desc">Discussion → unified answer</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">▲</span>
+                            <span class="mode-name">Hierarchy</span>
+                            <span class="mode-desc">Lead speaks, others support</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">✧</span>
+                            <span class="mode-name">Chaos</span>
+                            <span class="mode-desc">All respond simultaneously</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">?</span>
+                            <span class="mode-name">Interrogation</span>
+                            <span class="mode-desc">One questioned by others</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">◈</span>
+                            <span class="mode-name">Tag Team</span>
+                            <span class="mode-desc">Select specific members</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">⚖</span>
+                            <span class="mode-name">Jury</span>
+                            <span class="mode-desc">Deliberate → verdict</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">💡</span>
+                            <span class="mode-name">Brainstorm</span>
+                            <span class="mode-desc">Rapid ideas, no criticism</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">🎭</span>
+                            <span class="mode-name">Roleplay</span>
+                            <span class="mode-desc">Character-based scenarios</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">🎤</span>
+                            <span class="mode-name">Interview</span>
+                            <span class="mode-desc">One-on-one questioning</span>
+                        </div>
+                        <div class="mode-card">
+                            <span class="mode-icon">🏆</span>
+                            <span class="mode-name">Tournament</span>
+                            <span class="mode-desc">Bracket elimination debates</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-header">
+                <span class="section-tag">PACKED WITH POWER</span>
+                <h2 class="section-title">🧠 WHAT'S INSIDE</h2>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">📚</span>
+                    </div>
+                    <h3>Knowledge Base (RAG)</h3>
+                    <p>Chat with your documents. PDF, TXT, MD, DOCX — all indexed locally with semantic search.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">🧪</span>
+                    </div>
+                    <h3>Prompt Engineering Lab</h3>
+                    <p>Visual prompt builder with variables, templates, and A/B testing to optimize your prompts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">🌳</span>
+                    </div>
+                    <h3>Conversation Branching</h3>
+                    <p>Fork conversations at any point. Explore alternatives. Merge the best branches.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">💻</span>
+                    </div>
+                    <h3>Code Sandbox</h3>
+                    <p>Execute JavaScript, Python, and Shell scripts directly. Test code without leaving the app.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">🎭</span>
+                    </div>
+                    <h3>40+ Personalities</h3>
+                    <p>From Code Expert to Creative Writer to Villain. Create and customize your own characters.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">🎨</span>
+                    </div>
+                    <h3>11 Retro Themes</h3>
+                    <p>Blood Moon, Cyberpunk, Matrix, Game Boy, DOS Amber, Synthwave, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">📦</span>
+                    </div>
+                    <h3>Model Manager</h3>
+                    <p>Download, organize, and switch between GGUF models. Drag and drop support.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrap">
+                        <span class="feature-icon">⚡</span>
+                    </div>
+                    <h3>GPU Acceleration</h3>
+                    <p>CUDA support for NVIDIA GPUs. Automatic hardware detection and optimization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="screenshots-header">
+                <span class="section-tag">SEE IT IN ACTION</span>
+                <h2 class="section-title">📸 SCREENSHOTS</h2>
+            </div>
+            
+            <div class="screenshot-gallery">
+                <div class="screenshot-item main-shot">
+                    <img src="assets/screenshots/main.png" alt="Main Interface" loading="lazy">
+                    <span class="shot-label">Main Interface</span>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/screenshots/senate.png" alt="Devil's Senate" loading="lazy">
+                    <span class="shot-label">Devil's Senate</span>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/screenshots/personalities.png" alt="Personalities" loading="lazy">
+                    <span class="shot-label">40+ Personalities</span>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/screenshots/manager.png" alt="Model Manager" loading="lazy">
+                    <span class="shot-label">Model Manager</span>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/screenshots/rag.png" alt="Knowledge Base" loading="lazy">
+                    <span class="shot-label">Knowledge Base</span>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/screenshots/boot.png" alt="Boot Screen" loading="lazy">
+                    <span class="shot-label">System Boot</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon" id="coming">
+        <div class="container">
+            <div class="coming-header">
+                <span class="section-tag">ON THE ROADMAP</span>
+                <h2 class="section-title">🚀 COMING SOON</h2>
+                <p class="section-subtitle">Early adopters get these features FREE when they ship</p>
+            </div>
+            
+            <div class="coming-grid">
+                <div class="coming-card">
+                    <div class="coming-badge">Q1 2026</div>
+                    <div class="coming-icon">🎤</div>
+                    <h3>Voice Prompts</h3>
+                    <p>Talk to your council with speech-to-text. Get spoken responses with text-to-speech.</p>
+                </div>
+                <div class="coming-card">
+                    <div class="coming-badge">Q2 2026</div>
+                    <div class="coming-icon">🖼️</div>
+                    <h3>Image Generation</h3>
+                    <p>Create visuals locally with Stable Diffusion. No cloud. No watermarks. Full control.</p>
+                </div>
+                <div class="coming-card">
+                    <div class="coming-badge">Q3 2026</div>
+                    <div class="coming-icon">🎬</div>
+                    <h3>Video Generation</h3>
+                    <p>Local video synthesis powered by open-source models. Create content without limits.</p>
+                </div>
+            </div>
+            
+            <div class="coming-cta">
+                <p>Download now and get all future features free</p>
+                <a href="#download" class="btn btn-primary">Get Early Access</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="download-bg"></div>
+        <div class="container">
+            <div class="download-header">
+                <span class="section-tag">CHOOSE YOUR PLATFORM</span>
+                <h2 class="section-title">📦 GET RED ANGEL</h2>
+                <p class="section-subtitle">Two apps. Same name. Different superpowers. Both 100% private.</p>
+            </div>
+            
+            <div class="apps-showcase">
+                <!-- Windows App -->
+                <div class="app-card featured">
+                    <div class="app-card-header">
+                        <div class="app-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                        </div>
+                        <div class="app-badge">DESKTOP</div>
+                    </div>
+                    <h3 class="app-title">Red Angel for Windows</h3>
+                    <p class="app-tagline">The Devil's Senate Command Center</p>
+                    
+                    <div class="app-features">
+                        <div class="app-feature">
+                            <span>⛧</span>
+                            <span>Devil's Senate — 6 AI minds debate your questions</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>🎭</span>
+                            <span>40+ personalities with 12 council modes</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>📚</span>
+                            <span>Knowledge Base (RAG) — chat with your documents</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>🌳</span>
+                            <span>Conversation branching & prompt lab</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>💻</span>
+                            <span>Code sandbox with JS, Python, Shell</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>⚡</span>
+                            <span>NVIDIA CUDA GPU acceleration</span>
+                        </div>
+                    </div>
+                    
+                    <div class="app-requirements">
+                        <span>💾 8GB+ RAM</span>
+                        <span>💿 5GB Storage</span>
+                        <span>🎮 GPU Optional</span>
+                    </div>
+                    
+                    <a href="#" class="app-download-btn">
+                        <span>Download for Windows</span>
+                        <span class="dl-size">64-bit • ~150 MB</span>
+                    </a>
+                </div>
+                
+                <!-- iOS App -->
+                <div class="app-card">
+                    <div class="app-card-header">
+                        <div class="app-icon apple">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        </div>
+                        <div class="app-badge ios">iOS</div>
+                    </div>
+                    <h3 class="app-title">Red Angel for iOS</h3>
+                    <p class="app-tagline">Your Personal AI Companion</p>
+                    
+                    <div class="app-features">
+                        <div class="app-feature">
+                            <span>☀️</span>
+                            <span>Daily Briefings — personalized morning updates</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>📔</span>
+                            <span>AI Journal with mood tracking & insights</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>🔮</span>
+                            <span>Oracle predictions & decision helper</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>💭</span>
+                            <span>Dream journal with AI interpretation</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>⏰</span>
+                            <span>Time Capsules — messages to future you</span>
+                        </div>
+                        <div class="app-feature">
+                            <span>🧘</span>
+                            <span>Focus modes & breathing exercises</span>
+                        </div>
+                    </div>
+                    
+                    <div class="app-requirements">
+                        <span>📱 iPhone/iPad</span>
+                        <span>🍎 iOS 17+</span>
+                        <span>🔒 On-Device AI</span>
+                    </div>
+                    
+                    <a href="#" class="app-download-btn ios-btn">
+                        <span>Download on App Store</span>
+                        <span class="dl-size">Coming Soon</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="apps-comparison">
+                <p class="comparison-note">
+                    <strong>Both apps run 100% offline</strong> — No cloud, no tracking, your data stays on your device.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community" id="community">
+        <div class="container">
+            <div class="community-header">
+                <span class="section-tag">JOIN US</span>
+                <h2 class="section-title">🔗 COMMUNITY</h2>
+                <p class="section-subtitle">Get support, share feedback, and connect with other users</p>
+            </div>
+            
+            <div class="social-grid">
+                <a href="https://x.com/i/communities/1983507349546357091" target="_blank" class="social-card primary">
+                    <span class="social-icon">𝕏</span>
+                    <div class="social-info">
+                        <span class="social-name">X Community</span>
+                        <span class="social-desc">Join discussions & get updates</span>
+                    </div>
+                </a>
+                <a href="https://x.com/shayzxbt" target="_blank" class="social-card">
+                    <span class="social-icon">𝕏</span>
+                    <div class="social-info">
+                        <span class="social-name">@shayzxbt</span>
+                        <span class="social-desc">Follow the creator</span>
+                    </div>
+                </a>
+                <a href="https://huggingface.co/shayzinasimulation/red-angel-unchained" target="_blank" class="social-card">
+                    <span class="social-icon">🤗</span>
+                    <div class="social-info">
+                        <span class="social-name">Hugging Face</span>
+                        <span class="social-desc">Models & documentation</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="assets/logo.png" alt="Red Angel" class="footer-logo-img">
+                    <span class="logo-text">RED ANGEL</span>
+                </div>
+                    <p class="footer-tagline">Your Private AI Command Center</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h5>Apps</h5>
+                        <a href="#download">Windows App</a>
+                        <a href="#download">iOS App</a>
+                        <a href="#senate">Devil's Senate</a>
+                        <a href="#features">Features</a>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Community</h5>
+                        <a href="https://x.com/i/communities/1983507349546357091" target="_blank">X Community</a>
+                        <a href="https://x.com/shayzxbt" target="_blank">@shayzxbt</a>
+                        <a href="https://huggingface.co/shayzinasimulation/red-angel-unchained" target="_blank">Hugging Face</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copy">Made with ❤️ by <strong>Shayz Productions</strong></p>
+                <p class="footer-privacy">No data collection. No tracking. Ever.</p>
+            </div>
         </div>
     </footer>
 
