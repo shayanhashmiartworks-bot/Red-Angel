@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagneticButtons();
     initTypewriter();
     initCounters();
+    initIosGallery();
     initScrollAnimations();
     initTiltCards();
     initScreenshotTabs();
@@ -258,11 +259,11 @@ function initTypewriter() {
     if (!element) return;
     
     const phrases = [
-        'Private AI That Never Phones Home',
-        'Your Data Stays On Your Device',
-        'No Cloud. No Tracking. No Limits.',
-        'Two Apps. Total Privacy.',
-        'AI Without Compromise'
+        'iOS-First. Private. Offline.',
+        'On-Device MLX • No Cloud',
+        'Your AI Companion, Fully Local',
+        'Windows Command Center Included',
+        'Zero Tracking. Ever.'
     ];
     
     let phraseIndex = 0;
@@ -348,7 +349,7 @@ function initCounters() {
 // ============================================
 function initScrollAnimations() {
     const elements = document.querySelectorAll(
-        '.feature-card, .why-card, .faq-item, .roadmap-item, .community-card, .screenshot-item, .ios-screenshot-card, [data-aos]'
+        '.feature-card, .why-card, .faq-item, .roadmap-item, .community-card, .screenshot-item, .ios-screenshot-card, .retro-card, .ios-main-card, .ios-featured-card, .ios-gallery-card, [data-aos]'
     );
     
     const observer = new IntersectionObserver((entries) => {
@@ -357,7 +358,7 @@ function initScrollAnimations() {
                 // Stagger animations for grid items
                 const parent = entry.target.parentElement;
                 const siblings = parent ? Array.from(parent.children).filter(
-                    child => child.matches('.feature-card, .why-card, .screenshot-item, .ios-screenshot-card')
+                    child => child.matches('.feature-card, .why-card, .screenshot-item, .ios-screenshot-card, .retro-card, .ios-main-card, .ios-featured-card, .ios-gallery-card')
                 ) : [];
                 const index = siblings.indexOf(entry.target);
                 const delay = index >= 0 ? index * 80 : 0;
@@ -426,24 +427,302 @@ function initScreenshotTabs() {
 }
 
 // ============================================
+// iOS GALLERY (Generated)
+// ============================================
+function initIosGallery() {
+    const galleryRoot = document.getElementById('iosGallery');
+    const featuredRoot = document.getElementById('iosFeatured');
+    if (!galleryRoot) return;
+
+    const featuredShots = [
+        {
+            title: 'AI Chat Control Room',
+            desc: 'Streaming responses, voice input, vision upload, and live context.',
+            src: 'assets/screenshots/ios/Chat Interface/Inner Chat Section ( chat view ) /main chat interface ( opened for chat , voice , image text , ).png'
+        },
+        {
+            title: 'Neural Journal Core',
+            desc: 'Mood tracking with AI insights and writing improvements.',
+            src: 'assets/screenshots/ios/Journal /Ai insights ( points ) , entry , mood interface.png'
+        },
+        {
+            title: 'Decision Engine',
+            desc: 'Weighted options, pros/cons, and AI recommendations.',
+            src: 'assets/screenshots/ios/Productivity ( Features Section - Features )/Decision Engine /overview ( after ai analysis ) .png'
+        },
+        {
+            title: 'Personal Oracle',
+            desc: 'Patterns, values, and growth prompts from your data.',
+            src: 'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /overview ( first half ) .png'
+        }
+    ];
+
+    const skinCycle = ['terminal', 'amber', 'violet', 'cyan', 'sunset'];
+
+    const iosGallerySections = [
+        {
+            title: 'Interface Overview',
+            items: [
+                'assets/screenshots/ios/Interface ( first page ) screenshots 2 halfs /first page ( interface ) .png',
+                'assets/screenshots/ios/Interface ( first page ) screenshots 2 halfs /first page ( other half ) interface .png',
+                'assets/screenshots/ios/Features ( Main Interface ) /features ( capture ).png',
+                'assets/screenshots/ios/Features ( Main Interface ) /features ( intelligence ).png',
+                'assets/screenshots/ios/Features ( Main Interface ) /features ( productivity).png',
+                'assets/screenshots/ios/Features ( Main Interface ) /features ( relationships ).png'
+            ]
+        },
+        {
+            title: 'Chat Interface',
+            items: [
+                'assets/screenshots/ios/Chat Interface/main overview outer section/chat interface ( main ) .png',
+                'assets/screenshots/ios/Chat Interface/main overview outer section/personalities : modes ( one half ) .png',
+                'assets/screenshots/ios/Chat Interface/main overview outer section/personalities : modes ( 2nd half ) .png',
+                'assets/screenshots/ios/Chat Interface/Inner Chat Section ( chat view ) /main chat interface ( opened for chat , voice , image text , ).png',
+                'assets/screenshots/ios/Chat Interface/Inner Chat Section ( chat view ) /a generated text.png',
+                'assets/screenshots/ios/Chat Interface/Inner Chat Section ( chat view ) /context usage edit  .png',
+                'assets/screenshots/ios/Chat Interface/Inner Chat Section ( chat view ) /edit section ( modes , context usage etc etc - precise , creative ) .png',
+                'assets/screenshots/ios/Chat Interface/Inner Chat Section ( chat view ) /speak:voice.png',
+                'assets/screenshots/ios/Chat Interface/Inner Chat Section ( chat view ) /token counter : mute : unmute ( model displayer ).png',
+                'assets/screenshots/ios/Chat Interface/Inner Chat Section ( chat view ) /token usage.png'
+            ]
+        },
+        {
+            title: 'Personas',
+            items: [
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/Adult.png",
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/All  ( Ai Modes ) .png",
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/All other half ( features that didnt come in the first half.png",
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/Chameleon.png",
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/Create Mode .png",
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/Create your own mode .png",
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/Creative.png",
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/Education.png",
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/General.png",
+                "assets/screenshots/ios/Intelligence ( Features Section ) /Ai Persona's/Science .png"
+            ]
+        },
+        {
+            title: 'Journal (Core)',
+            items: [
+                'assets/screenshots/ios/Journal /a note written .png',
+                'assets/screenshots/ios/Journal /Ai Insight ( on my inputted journal ) .png',
+                'assets/screenshots/ios/Journal /Ai insights ( points ) , entry , mood interface.png',
+                'assets/screenshots/ios/Journal /improved writing of that note .png',
+                'assets/screenshots/ios/Journal /Main Interface ( no journal written yet:empty ) .png',
+                'assets/screenshots/ios/Journal /main interface ( with 2 journals written , ai analysed and indicating my current mood ) .png',
+                'assets/screenshots/ios/Journal /the section where you write and select how you feel ( imrove writing : save section ) .png'
+            ]
+        },
+        {
+            title: 'Neural Journal (Capture)',
+            items: [
+                'assets/screenshots/ios/Capture ( Features Section ) /Neural Journal /a note written .png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Neural Journal /Ai Insight ( on my inputted journal ) .png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Neural Journal /Ai insights ( points ) , entry , mood interface.png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Neural Journal /improved writing of that note .png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Neural Journal /Main Interface ( no journal written yet:empty ) .png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Neural Journal /main interface ( with 2 journals written , ai analysed and indicating my current mood ) .png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Neural Journal /the section where you write and select how you feel ( imrove writing : save section ) .png'
+            ]
+        },
+        {
+            title: 'Dream Capture',
+            items: [
+                'assets/screenshots/ios/Capture ( Features Section ) /Dream Capture /dream ( journal record ) .png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Dream Capture /dream capture .png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Dream Capture /insights.png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Dream Capture /patterns.png'
+            ]
+        },
+        {
+            title: 'Time Capsules',
+            items: [
+                'assets/screenshots/ios/Capture ( Features Section ) /Time Capsule/message to the future you ( heading ) .png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Time Capsule/Time Capsule .png',
+                'assets/screenshots/ios/Capture ( Features Section ) /Time Capsule/Time Capsule templates .png'
+            ]
+        },
+        {
+            title: 'Personal Oracle',
+            items: [
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /ask the oracle.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /blind spots.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /Deep Analysis ( analysis the journals ) .png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /growth .png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /overview ( first half ) .png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /overview ( other half 2 ) .png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /patterns.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /personal oracle ( main interface ( empty ) ).png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /relationships.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /Screenshot 2026-01-30 at 2.07.59 AM.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Personal Oracle /values.png'
+            ]
+        },
+        {
+            title: 'Memory System',
+            items: [
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Ai Memory/all ( ai memory section ( not empty ) ) .png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Ai Memory/all ( approved : correct : wrong ) .png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Ai Memory/experience.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Ai Memory/fact.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Ai Memory/goals.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Ai Memory/opinion.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Ai Memory/preference.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Ai Memory/relationships.png'
+            ]
+        },
+        {
+            title: 'Documents & RAG',
+            items: [
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Rag/Rag Documents.png',
+                'assets/screenshots/ios/Intelligence ( Features Section ) /Rag/Screenshot 2026-01-30 at 2.17.05 AM.png'
+            ]
+        },
+        {
+            title: 'Decision Engine',
+            items: [
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Decision Engine /decsion engine .png',
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Decision Engine /decsion engine ( written : not empty ) .png',
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Decision Engine /overview ( after ai analysis ) .png',
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Decision Engine /overview ( before ai analysis ) .png',
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Decision Engine /poll : options.png'
+            ]
+        },
+        {
+            title: 'Neural Sync Focus',
+            items: [
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Neural Sync/focus goals.png',
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Neural Sync/focus mode.png',
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Neural Sync/neural sync ( main page ) .png',
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Neural Sync/neural sync main ( neaural state , ai recommendation ).png',
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Neural Sync/statistics.png'
+            ]
+        },
+        {
+            title: 'AI Wellness',
+            items: [
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Ai Wellness/Ai Wellness.png',
+                'assets/screenshots/ios/Productivity ( Features Section - Features )/Ai Wellness/recommended excersises ( based on my whole exposure to the system : data ).png'
+            ]
+        },
+        {
+            title: 'Relationships',
+            items: [
+                "assets/screenshots/ios/Relationship's DNA ( Featues Section Feature ) /Relationships/ai insight.png",
+                "assets/screenshots/ios/Relationship's DNA ( Featues Section Feature ) /Relationships/main page ( not empty : filled ) .png",
+                "assets/screenshots/ios/Relationship's DNA ( Featues Section Feature ) /Relationships/Main Page ( Overview ) .png",
+                "assets/screenshots/ios/Relationship's DNA ( Featues Section Feature ) /Relationships/selecting section.png"
+            ]
+        },
+        {
+            title: 'System Setup',
+            items: [
+                'assets/screenshots/ios/System Setup/about section.png',
+                'assets/screenshots/ios/System Setup/all models ( browse models section ) .png',
+                'assets/screenshots/ios/System Setup/all voices : fine tune section.png',
+                'assets/screenshots/ios/System Setup/coming soon features.png',
+                'assets/screenshots/ios/System Setup/data and sync.png',
+                'assets/screenshots/ios/System Setup/device and perfomance section.png',
+                'assets/screenshots/ios/System Setup/generation control section.png',
+                'assets/screenshots/ios/System Setup/interface edit section.png',
+                'assets/screenshots/ios/System Setup/model loaded ( section ) .png',
+                'assets/screenshots/ios/System Setup/model not loaded ( unloaded ) section.png',
+                'assets/screenshots/ios/System Setup/open ( browse model section ) .png',
+                'assets/screenshots/ios/System Setup/secuirity and privacy section.png',
+                'assets/screenshots/ios/System Setup/supported models.png',
+                'assets/screenshots/ios/System Setup/system setup ( model loaded ) .png',
+                'assets/screenshots/ios/System Setup/Voice section - select voice ( voice modes ).png'
+            ]
+        },
+        {
+            title: 'Onboarding',
+            items: [
+                'assets/screenshots/ios/Onboarding Section Screenshots/100% private ( your data never leaves ) page .png',
+                'assets/screenshots/ios/Onboarding Section Screenshots/ai powered features ( onboarding ) .png',
+                'assets/screenshots/ios/Onboarding Section Screenshots/Loading Screen.png',
+                'assets/screenshots/ios/Onboarding Section Screenshots/models ( ram size etc etc ) onboarding page.png',
+                'assets/screenshots/ios/Onboarding Section Screenshots/Multiple Personalities ( onboarding ) .png',
+                'assets/screenshots/ios/Onboarding Section Screenshots/powered by apple silicon page .png',
+                'assets/screenshots/ios/Onboarding Section Screenshots/truly uncensored:no limitations page.png',
+                'assets/screenshots/ios/Onboarding Section Screenshots/welcome page.png'
+            ]
+        }
+    ];
+
+    const formatShotLabel = (src) => {
+        const file = src.split('/').pop() || '';
+        return file.replace(/\.[^/.]+$/, '').replace(/\s+/g, ' ').trim();
+    };
+
+    if (featuredRoot) {
+        featuredRoot.innerHTML = '';
+        featuredShots.forEach((shot, index) => {
+            const card = document.createElement('article');
+            card.className = 'ios-featured-card';
+            card.setAttribute('data-aos', '');
+            card.dataset.skin = skinCycle[index % skinCycle.length];
+            card.innerHTML = `
+                <div class="ios-featured-frame">
+                    <img src="${shot.src}" alt="${shot.title}" loading="lazy">
+                </div>
+                <h4>${shot.title}</h4>
+                <p>${shot.desc}</p>
+            `;
+            featuredRoot.appendChild(card);
+        });
+    }
+
+    galleryRoot.innerHTML = '';
+    iosGallerySections.forEach((section) => {
+        const sectionEl = document.createElement('div');
+        sectionEl.className = 'ios-gallery-section';
+        sectionEl.innerHTML = `<h4>${section.title}</h4>`;
+
+        const grid = document.createElement('div');
+        grid.className = 'ios-gallery-grid';
+
+        section.items.forEach((src, index) => {
+            const label = formatShotLabel(src);
+            const card = document.createElement('figure');
+            card.className = 'ios-gallery-card';
+            card.setAttribute('data-aos', '');
+            card.dataset.skin = skinCycle[index % skinCycle.length];
+            card.innerHTML = `
+                <div class="ios-gallery-frame">
+                    <img src="${src}" alt="${label}" loading="lazy">
+                </div>
+                <figcaption>${label}</figcaption>
+            `;
+            grid.appendChild(card);
+        });
+
+        sectionEl.appendChild(grid);
+        galleryRoot.appendChild(sectionEl);
+    });
+}
+
+// ============================================
 // FAQ ACCORDION
 // ============================================
 function initFAQ() {
-    const items = document.querySelectorAll('.faq-item');
+    const lists = document.querySelectorAll('.faq-list');
     
-    items.forEach(item => {
-        const question = item.querySelector('.faq-question');
+    lists.forEach(list => {
+        const items = list.querySelectorAll('.faq-item');
         
-        question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
+        items.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            if (!question) return;
             
-            // Close all
-            items.forEach(i => i.classList.remove('active'));
-            
-            // Toggle current
-            if (!isActive) {
-                item.classList.add('active');
-            }
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                items.forEach(i => i.classList.remove('active'));
+                
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
         });
     });
 }
@@ -455,7 +734,7 @@ function initLightbox() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
     const closeBtn = document.querySelector('.lightbox-close');
-    const screenshots = document.querySelectorAll('.screenshot-item img, .ios-phone-frame img');
+    const screenshots = document.querySelectorAll('.screenshot-item img, .ios-phone-frame img, .retro-screen img, .ios-shot-frame img, .ios-main-frame img, .ios-featured-frame img, .ios-gallery-frame img, .iphone-screen img');
     
     if (!lightbox || !lightboxImage) return;
     
